@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:CtiTypyOsob:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:CtiTypyOsob:v1" xmlns:csv="urn:cz:cnb:sdat:schemas:CtiTypyOsob:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" xmlns:sys="urn:cz:cnb:sdat:schemas:SystemTypy:v1" version="1.0.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SystemTypy:v1" schemaLocation="../common/SystemTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" schemaLocation="../common/SpolecneTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="../common/DatoveTypy.xsd"/>
+	<xs:complexType name="CtiTypyOsobDotazType">
+		<xs:sequence>
+			<xs:element name="PlatnostKDatu" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TypOsobyKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Jazyk" type="com:Jazyk" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CtiTypyOsobResponse" type="csv:CtiTypyOsobResponseType"/>
+	<xs:complexType name="CtiTypyOsobOdpovedType">
+		<xs:sequence>
+			<xs:element name="TypyOsob" type="TypOsobType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiTypyOsobRequestType">
+		<xs:sequence>
+			<xs:element name="ZadostInfo" type="sys:ZadostInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiTypyOsobDotazType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CtiTypyOsobRequest" type="csv:CtiTypyOsobRequestType"/>
+	<xs:complexType name="CtiTypyOsobResponseType">
+		<xs:sequence>
+			<xs:element name="OdpovedInfo" type="sys:OdpovedInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiTypyOsobDotazType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Odpoved" type="CtiTypyOsobOdpovedType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypOsobType">
+		<xs:sequence>
+			<xs:element name="TypOsoby" type="TypOsobyType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="SeznamOsob" type="com:SeznamKoduType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TypOsobyType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Poznamka" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

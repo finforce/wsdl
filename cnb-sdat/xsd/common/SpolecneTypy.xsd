@@ -1,0 +1,1995 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" version="1.1.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="DatoveTypy.xsd"/>
+	<xs:simpleType name="Nasobek">
+		<xs:annotation>
+			<xs:documentation>Násobky</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Jedna
+
+#CZ 1
+#EN 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10">
+				<xs:annotation>
+					<xs:documentation>Deset
+
+#CZ 10
+#EN 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="100">
+				<xs:annotation>
+					<xs:documentation>Sto
+
+#CZ 100
+#EN 100</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1000">
+				<xs:annotation>
+					<xs:documentation>Tisíc
+
+#CZ 1 000
+#EN 1 000</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10000">
+				<xs:annotation>
+					<xs:documentation>Deset tisíc
+
+#CZ 10 000
+#EN 10 000</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="100000">
+				<xs:annotation>
+					<xs:documentation>Sto tisíc
+
+#CZ 100 000
+#EN 100 000</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1000000">
+				<xs:annotation>
+					<xs:documentation>Milion
+
+#CZ 1 000 000
+#EN 1 000 000</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10000000">
+				<xs:annotation>
+					<xs:documentation>Deset milionů
+
+#CZ 10 000 000
+#EN 10 000 000</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="100000000">
+				<xs:annotation>
+					<xs:documentation>Sto milionů
+
+#CZ 100 000 000
+#EN 100 000 000</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1000000000">
+				<xs:annotation>
+					<xs:documentation>Miliarda
+
+#CZ 1 000 000 000
+#EN 1 000 000 000</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OborParametru">
+		<xs:annotation>
+			<xs:documentation>Obor hodnot parametru (číselník, datový typ).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CIS">
+				<xs:annotation>
+					<xs:documentation>Číselník
+
+#CZ Číselník
+#EN Code List</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DT">
+				<xs:annotation>
+					<xs:documentation>Datový typ
+
+#CZ Datový typ
+#EN Data Type</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypParametru">
+		<xs:annotation>
+			<xs:documentation>Typy parametru</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="P">
+				<xs:annotation>
+					<xs:documentation>Popisný
+
+#CZ Popisný
+#EN Descriptive</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="I">
+				<xs:annotation>
+					<xs:documentation>Identifikační
+
+#CZ Identifikační
+#EN Identification</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="V">
+				<xs:annotation>
+					<xs:documentation>Výskytový
+
+#CZ Výskytový
+#EN Instance</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="O">
+				<xs:annotation>
+					<xs:documentation>Organizační
+
+#CZ Organizační
+#EN Organizational</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="T">
+				<xs:annotation>
+					<xs:documentation>Technický
+
+#CZ Technický
+#EN Technical</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R">
+				<xs:annotation>
+					<xs:documentation>Transakční
+
+#CZ Transakční
+#EN Transactional</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypUkazatele">
+		<xs:annotation>
+			<xs:documentation>Typy ukazatelů</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="U">
+				<xs:annotation>
+					<xs:documentation>První úroveň
+
+#CZ První úroveň
+#EN First Level</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K">
+				<xs:annotation>
+					<xs:documentation>Druhá úroveň
+
+#CZ Druhá úroveň
+#EN Second Level</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ZakladniDtUkazatele">
+		<xs:annotation>
+			<xs:documentation>Základní datové typy Ukazatelů</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CISLO">
+				<xs:annotation>
+					<xs:documentation>Číselný,Number</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DATUM">
+				<xs:annotation>
+					<xs:documentation>Datumový,Date</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TEXT">
+				<xs:annotation>
+					<xs:documentation>Textový,Text</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CISELNIK">
+				<xs:annotation>
+					<xs:documentation>Číselník, Code List</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BINARNI">
+				<xs:annotation>
+					<xs:documentation>Binární
+
+#CZ Binární
+#EN Binary</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RozsahyZarazeniUctu">
+		<xs:annotation>
+			<xs:documentation>Rozsahy zařazení účtu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="S">
+				<xs:annotation>
+					<xs:documentation>Syntetický
+
+#CZ Syntetický
+#EN Synthetic</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A">
+				<xs:annotation>
+					<xs:documentation>Analytický
+
+#CZ Analytický
+#EN Analytic</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypyZarazeniUctu">
+		<xs:annotation>
+			<xs:documentation>Typy zařazení účtů</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="KO">
+				<xs:annotation>
+					<xs:documentation>Kreditní obrat
+
+#CZ Kreditní obrat
+#EN Credit Turnover</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DO">
+				<xs:annotation>
+					<xs:documentation>Debetní obrat
+
+#CZ Debetní obrat
+#EN Debet Turnover</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VKO">
+				<xs:annotation>
+					<xs:documentation>Výsledný kreditní obrat
+
+#CZ Výsledný kreditní obrat
+#EN Resulting Credit Turnover</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VDO">
+				<xs:annotation>
+					<xs:documentation>Výsledný debetní obrat
+
+#CZ Výsledný debetní obrat
+#EN Resulting Debet Turnover</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VO">
+				<xs:annotation>
+					<xs:documentation>Výsledný obrat
+
+#CZ Výsledný obrat
+#EN Resulting Turnover</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KDO">
+				<xs:annotation>
+					<xs:documentation>Kreditní nebo debetní obrat
+
+#CZ Kreditní nebo debetní obrat
+#EN Credit or Debet Turnover</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KZ">
+				<xs:annotation>
+					<xs:documentation>Kreditní zůstatek
+
+#CZ Kreditní zůstatek
+#EN Credit Balance</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DZ">
+				<xs:annotation>
+					<xs:documentation>Debetní zůstetek
+
+#CZ Debetní zůstatek
+#EN Debet Balance</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VKZ">
+				<xs:annotation>
+					<xs:documentation>Výsledný kreditní zůstatek
+
+#CZ Výsledný kreditní zůstatek
+#EN Resulting Credit Balance</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VDZ">
+				<xs:annotation>
+					<xs:documentation>Výsledný debetní zůstatek
+
+#CZ Výsledný debetní zůstatek
+#EN Resulting Debet Balance</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VZ">
+				<xs:annotation>
+					<xs:documentation>Výsledný zůstatek,Resulting Balance
+
+#CZ Výsledný zůstatek
+#EN Resulting Balance</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ZnamenkoZarazeniUctu">
+		<xs:annotation>
+			<xs:documentation>Znaménka zařazení účtu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="P">
+				<xs:annotation>
+					<xs:documentation>Plus
+
+#CZ Plus
+#EN Plus</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="M">
+				<xs:annotation>
+					<xs:documentation>Mínus
+
+#CZ Minus
+#EN Minus</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ZpusobyZarazeniUctu">
+		<xs:annotation>
+			<xs:documentation>Způsoby zařazení účtu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="I">
+				<xs:annotation>
+					<xs:documentation>Včetně
+
+#CZ Včetně
+#EN Include</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E">
+				<xs:annotation>
+					<xs:documentation>Bez
+
+#CZ Bez
+#EN Exclude</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypUctu">
+		<xs:annotation>
+			<xs:documentation>Typy účtů</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A">
+				<xs:annotation>
+					<xs:documentation>Aktivní
+
+#CZ Aktivní
+#EN Active</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P">
+				<xs:annotation>
+					<xs:documentation>Pasivní
+
+#CZ Pasivní
+#EN Passive</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AP">
+				<xs:annotation>
+					<xs:documentation>Aktivní i pasivní
+
+#CZ Aktivní i pasivní
+#EN Active and Passive</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UrovenUctu">
+		<xs:annotation>
+			<xs:documentation>Typy úrovní účtů</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="T">
+				<xs:annotation>
+					<xs:documentation>Účtová třída
+
+#CZ Účtová třída
+#EN Accounting Class</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="S">
+				<xs:annotation>
+					<xs:documentation>Účtová skupina
+
+#CZ Účtová skupina
+#EN Accounting Group</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="U">
+				<xs:annotation>
+					<xs:documentation>Syntetický účet
+
+#CZ Syntetický účet
+#EN Synthetic Account</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ZakladniDatoveTypy2">
+		<xs:annotation>
+			<xs:documentation>Základní datové typy bez binárního typu.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CISLO">
+				<xs:annotation>
+					<xs:documentation>Číslo
+
+#CZ Číslo
+#EN Number</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TEXT">
+				<xs:annotation>
+					<xs:documentation>Text
+
+#CZ Text
+#EN Text</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DATUM">
+				<xs:annotation>
+					<xs:documentation>Datum
+
+#CZ Datum
+#EN Date</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StavyMetodiky">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Projektovany"/>
+			<xs:enumeration value="Platny"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypKnihovny">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CNB">
+				<xs:annotation>
+					<xs:documentation>ČNB,ČNB</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EBA">
+				<xs:annotation>
+					<xs:documentation>EBA,EBA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EIOPA">
+				<xs:annotation>
+					<xs:documentation>EIOPA,EIOPA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ESMA">
+				<xs:annotation>
+					<xs:documentation>ESMA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypDatoveOblasti">
+		<xs:annotation>
+			<xs:documentation>Typy Datové oblasti</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="STATICKA">
+				<xs:annotation>
+					<xs:documentation>Statická
+
+#CZ Statická
+#EN Static</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DYNAMICKA">
+				<xs:annotation>
+					<xs:documentation>Dynamická
+
+#CZ Dynamická
+#EN Dynamic</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KARTOTEKA">
+				<xs:annotation>
+					<xs:documentation>Kartová
+
+#CZ Kartová
+#EN Card</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VOLNA">
+				<xs:annotation>
+					<xs:documentation>Volná
+
+#CZ Volná
+#EN Lax</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypHodnotyVektoru">
+		<xs:annotation>
+			<xs:documentation>Typy hodnoty vektoru</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="P">
+				<xs:annotation>
+					<xs:documentation>Položka číselníku
+
+#CZ Položka číselníku
+#EN Code List Item</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D">
+				<xs:annotation>
+					<xs:documentation>Hodnota datového typu
+
+#CZ Hodnota datového typu
+#EN Data Type Value</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="H">
+				<xs:annotation>
+					<xs:documentation>Hierarchie číselníku
+
+#CZ Hierarchie číselníku
+#EN Code List Hierarchy</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="M">
+				<xs:annotation>
+					<xs:documentation>Doména číselníku
+
+#CZ Doména číselníku
+#EN Code List Domain</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="T">
+				<xs:annotation>
+					<xs:documentation>Datový typ
+
+#CZ Datový typ
+#EN Data Type</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="S">
+				<xs:annotation>
+					<xs:documentation>Součet za Datový typ
+
+#CZ Součet za Datový typ
+#EN Summary Data Type</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypOboruHodnot">
+		<xs:annotation>
+			<xs:documentation>Typ oboru hodnot</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DT">
+				<xs:annotation>
+					<xs:documentation>Datový typ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CIS">
+				<xs:annotation>
+					<xs:documentation>Číselník</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOC">
+				<xs:annotation>
+					<xs:documentation>Doména číselníku</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypRozpaduHierarchie">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="C">
+				<xs:annotation>
+					<xs:documentation>Úplný
+
+#CZ Úplný
+#EN Complete</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P">
+				<xs:annotation>
+					<xs:documentation>Částečný
+
+#CZ Částečný
+#EN Partial</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="S">
+				<xs:annotation>
+					<xs:documentation>Nadřazený
+
+#CZ Nadřazený
+#EN Superset</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ZakladniTypKontroly">
+		<xs:annotation>
+			<xs:documentation>Základní typy kontrol (JVK, KČŘ, MVK)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="JVK">
+				<xs:annotation>
+					<xs:documentation>Jednovýkazová
+
+#CZ Jednovýkazová
+#EN In Report</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MVK">
+				<xs:annotation>
+					<xs:documentation>Mezivýkazová
+
+#CZ Mezivýkazová
+#EN Cross Report</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KCR">
+				<xs:annotation>
+					<xs:documentation>Kontrola časové řady
+
+#CZ Kontrola časové řady
+#EN Time Series</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ZavaznostKontroly">
+		<xs:annotation>
+			<xs:documentation>Závažnosti kontroly</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Zavazna">
+				<xs:annotation>
+					<xs:documentation>Závažná
+
+#CZ Závažná
+#EN Correction</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Potvrzeni">
+				<xs:annotation>
+					<xs:documentation>Potvrzení
+
+#CZ Potvrzení
+#EN Confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Varovani">
+				<xs:annotation>
+					<xs:documentation>Varování
+
+#CZ Varování
+#EN Warning</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Jazyk">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CZ"/>
+			<xs:enumeration value="EN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RoleOsoby">
+		<xs:annotation>
+			<xs:documentation>Systémový číselník rolí, v nichž může vystupovat Osoba.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ZASTUPUJICI">
+				<xs:annotation>
+					<xs:documentation>#CZ Zastupující osoba
+#EN Deputy Entity
+Zastupující osoba</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VYKAZUJICI">
+				<xs:annotation>
+					<xs:documentation>#CZ Vykazující osoba
+#EN Reporting Entity
+Vykazující osoba</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ObsahKnihovny">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NIC"/>
+			<xs:enumeration value="VSE"/>
+			<xs:enumeration value="RELEVANTNI"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypSouctu">
+		<xs:annotation>
+			<xs:documentation>Typy součtovosti elementu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="C">
+				<xs:annotation>
+					<xs:documentation>Úplný
+
+#CZ Úplný
+#EN Complete</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P">
+				<xs:annotation>
+					<xs:documentation>Částečný
+
+#CZ Částečný
+#EN Partial</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="N">
+				<xs:annotation>
+					<xs:documentation>Žádný
+
+#CZ Žádný
+#EN No</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypVydani">
+		<xs:annotation>
+			<xs:documentation>Typ Vydání výskytu výkazu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DATA">
+				<xs:annotation>
+					<xs:documentation>Data
+
+#CZ Data
+#EN Data</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DATA_CAST">
+				<xs:annotation>
+					<xs:documentation>Část dat děleného vydání
+
+#CZ Část dat děleného vydání
+#EN A part of split data</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STORNO">
+				<xs:annotation>
+					<xs:documentation>Storno
+
+#CZ Storno
+#EN Cancellation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POTVRZENI">
+				<xs:annotation>
+					<xs:documentation>Potvrzení
+
+#CZ Potvrzení
+#EN Confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypCertifikatu">
+		<xs:annotation>
+			<xs:documentation>Typy certifikátů</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SSL">
+				<xs:annotation>
+					<xs:documentation>#CZ Certifikát pro autentizaci webových služeb (SSL)
+#EN Certificate for web services authentication (SSL)
+Komeční serverový certifikát pro SSL handshake</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPC">
+				<xs:annotation>
+					<xs:documentation>#CZ Certifikát pro elektronickou pečeť
+#EN Certificate for electronic seal
+Certfikát pro elektronickou pečeť</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPO">
+				<xs:annotation>
+					<xs:documentation>#CZ Certifikát pro elektronický podpis uživatele
+#EN Certificate for electronic signature
+Certfifikát pro elektronický podpis</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="KrokZpracovani">
+		<xs:annotation>
+			<xs:documentation>Kroky zpracování</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VZ">
+				<xs:annotation>
+					<xs:documentation>Kontroly Vstupní zprávy</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VYD">
+				<xs:annotation>
+					<xs:documentation>Kontroly Vydání výskytu výkazu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JVK">
+				<xs:annotation>
+					<xs:documentation>Jednovýkazové konrtroly</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MVK">
+				<xs:annotation>
+					<xs:documentation>Mezivýkazové kontroly</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FKZ">
+				<xs:annotation>
+					<xs:documentation>Formální kontroly záznamu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypPrilohy">
+		<xs:annotation>
+			<xs:documentation>Typ přílohy</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VYKAZ">
+				<xs:annotation>
+					<xs:documentation>Příloha k Výkazu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DO">
+				<xs:annotation>
+					<xs:documentation>Příloha k Datové oblasti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UDAJ">
+				<xs:annotation>
+					<xs:documentation>Příloha k Údaji</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypZmen">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AKTUALNI"/>
+			<xs:enumeration value="PREDCHOZI"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RolePracovnika">
+		<xs:annotation>
+			<xs:documentation>#CZ Role pracovníka
+#EN Employee Role
+Role (typ odpovědnosti) Pracovníka ve vztahu k datům dané Osoby</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VECNY_SPRAVCE">
+				<xs:annotation>
+					<xs:documentation>#CZ Věcný správce
+#EN Business Administrator
+Věcný správce</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TECHNICKY_SPRAVCE">
+				<xs:annotation>
+					<xs:documentation>#CZ Technický správce
+#EN Technical Administrator
+Technický správce</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPOMINKY_2_STUPEN">
+				<xs:annotation>
+					<xs:documentation>#CZ Příjemce upomínek 2.stupně
+#EN 2nd Reminders Receiver
+Příjemce upomínek 2.stupně</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPOMINKY_3_STUPEN">
+				<xs:annotation>
+					<xs:documentation>#CZ Příjemce upomínek 3.stupně
+#EN 3rd Reminders Receiver
+Příjemce upomínek 3.stupně</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="KategorieOsoby">
+		<xs:annotation>
+			<xs:documentation>#CZ Kategorie osoby
+#EN Entity Category
+KategorieOsoby slouží k rozdělení Osob z pohledu množiny hodnot dynamických atributů, které jsou pro danou konkrétní Osobu sledovány, případně vyžadovány.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PRAVNICKA">
+				<xs:annotation>
+					<xs:documentation>#CZ Právnická osoba
+#EN Legal Entity
+Právnická osoba</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FYZICKA">
+				<xs:annotation>
+					<xs:documentation>#CZ Fyzická osoba
+#EN Person
+Fyzická osoba</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JINA">
+				<xs:annotation>
+					<xs:documentation>#CZ Jiná osoba
+#EN Other Entity
+Jiná osoba (bez právní subjektivity, bez aplikačních účtů - musí být zaožena alespoň jedna Zastupující osoba)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ZakladniDatoveTypy">
+		<xs:annotation>
+			<xs:documentation>Základní datové typy</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CISLO">
+				<xs:annotation>
+					<xs:documentation>Číslo
+
+#CZ Číslo
+#EN Number</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TEXT">
+				<xs:annotation>
+					<xs:documentation>Text
+
+#CZ Text
+#EN Text</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DATUM">
+				<xs:annotation>
+					<xs:documentation>Datum
+
+#CZ Datum
+#EN Date</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BINARNI">
+				<xs:annotation>
+					<xs:documentation>Binární
+
+#CZ Binární
+#EN Binary</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StavyStandardni">
+		<xs:annotation>
+			<xs:documentation>Stavy standardního objektu.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Projektovany">
+				<xs:annotation>
+					<xs:documentation>Projektovaný
+
+#CZ Projektovaný
+#EN Projected</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Schvaleny">
+				<xs:annotation>
+					<xs:documentation>Schválený
+
+#CZ Schválený
+#EN Approved</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Platny">
+				<xs:annotation>
+					<xs:documentation>Platný
+
+#CZ Platný
+#EN Valid</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FormatVstupnichDat2">
+		<xs:annotation>
+			<xs:documentation>Formát vstupních dat (tvořících obsah Vydání výskytu výkazu)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="XMLSDAT">
+				<xs:annotation>
+					<xs:documentation>XML SDAT
+
+#CZ XML
+#EN XML</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XBRL">
+				<xs:annotation>
+					<xs:documentation>XBRL
+
+#CZ XBRL
+#EN XBRL</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISO20022">
+				<xs:annotation>
+					<xs:documentation>ISO 20022
+
+#CZ ISO 20022
+#EN ISO 20022</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IXBRL">
+				<xs:annotation>
+					<xs:documentation>iXBRL
+
+#CZ iXBRL
+#EN iXBRL</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EDIFACT">
+				<xs:annotation>
+					<xs:documentation>EDIFACT
+
+#CZ  EDIFACT
+#EN  EDIFACT</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XMLMTS">
+				<xs:annotation>
+					<xs:documentation>XML MTS
+
+#CZ XML
+#EN XML</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ZpusobPodepsani">
+		<xs:annotation>
+			<xs:documentation>Způsoby podepsání dat výkazu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NE">
+				<xs:annotation>
+					<xs:documentation>Není požadován
+
+#CZ Nepožadován
+#EN Not required</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPECET">
+				<xs:annotation>
+					<xs:documentation>Elektronická pečeť
+
+#CZ Elektronická pečeť
+#EN Electronic seal</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPODPIS">
+				<xs:annotation>
+					<xs:documentation>Elektronický podpis
+
+#CZ Elektronický podpis
+#EN Electronic signature</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPECETPODPIS">
+				<xs:annotation>
+					<xs:documentation>Elektronická pečeť nebo podpis
+
+#CZ Elektronická pečeť nebo podpis
+#EN Electronic seal or signature</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SeznamKoduType">
+		<xs:annotation>
+			<xs:documentation>Seznam kódů oddělených mezerou</xs:documentation>
+		</xs:annotation>
+		<xs:list itemType="xs:string"/>
+	</xs:simpleType>
+	<xs:complexType name="OtiskType">
+		<xs:sequence>
+			<xs:element name="TypOtisku" type="TypOtisku" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Otisk" type="dt:DT_TEXT128" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Otisk v hexadecimálním formátu.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PodpisType">
+		<xs:annotation>
+			<xs:documentation>Obsahuje uuencoded podpis  ve formátu XML - XAdES Detached</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<xs:simpleType name="TypOsy">
+		<xs:annotation>
+			<xs:documentation>Typy osy</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="X">
+				<xs:annotation>
+					<xs:documentation>Osa X
+
+#CZ Osa X
+#EN Axis X</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Y">
+				<xs:annotation>
+					<xs:documentation>Osa Y
+
+#CZ Osa Y
+#EN Axis Y</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Z">
+				<xs:annotation>
+					<xs:documentation>Osa Z
+
+#CZ Osa Z
+#EN Axis Z</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypElementuOsy">
+		<xs:annotation>
+			<xs:documentation>Rozlišuje, zda se jedná o:
+- Ukazatel
+- Parametr a jeho hodnotu (položku číselníku)
+- Dynamický parametr a jeho obor hodnot </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UKAZATEL">
+				<xs:annotation>
+					<xs:documentation>Ukazatel
+
+#CZ Ukazatel
+#EN Indicator</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PARAMETR">
+				<xs:annotation>
+					<xs:documentation>Hodnota parametru
+
+#CZ Hodnota parametru
+#EN Dimension Value</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DYNPAR">
+				<xs:annotation>
+					<xs:documentation>Dynamický parametr
+
+#CZ Dynamický parametr
+#EN Dynamic Dimension</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypAkceOsoby">
+		<xs:annotation>
+			<xs:documentation>Typ akce osoby</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OPRAVIT">
+				<xs:annotation>
+					<xs:documentation>Opravit
+
+#CZ Opravit
+#EN Correct</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POTVRDIT">
+				<xs:annotation>
+					<xs:documentation>Potvrdit
+
+#CZ Potvrdit
+#EN Confirm</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StavVydani">
+		<xs:annotation>
+			<xs:documentation>Stav Vydání výskytu výkazu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ZALOZENO">
+				<xs:annotation>
+					<xs:documentation>Založené
+
+#CZ Založené
+#EN Created</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZPRACOVANI_FK">
+				<xs:annotation>
+					<xs:documentation>Zpracovávané - formátové kontroly
+
+#CZ Zpracovávané – FK
+#EN In progess - FK</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOKONCENO_FK">
+				<xs:annotation>
+					<xs:documentation>Zpracované formátové kontroly
+
+#CZ Dokončené - FK
+#EN Complted - FK</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZPRACOVANI_JVK">
+				<xs:annotation>
+					<xs:documentation>Zpracovávané – JVK
+
+#CZ Zpracovávané – JVK
+#EN In progress - JVK</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CEKANI_JVK">
+				<xs:annotation>
+					<xs:documentation>Čekání – JVK
+
+#CZ Čekání – JVK
+#EN Pending - JVK</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POTVRZENI_JVK">
+				<xs:annotation>
+					<xs:documentation>Potvrzení – JVK
+
+#CZ Potvrzení– JVK
+#EN Comfirmation - JVK</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CEKANI_TRN">
+				<xs:annotation>
+					<xs:documentation>Nedokončené zpracování přijatých nebo čekajících transakcí
+
+#CZ Čekání – TRN
+#EN Pending - TRN</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZPRACOVANI_MVK">
+				<xs:annotation>
+					<xs:documentation>Zpracovávané – MVK
+
+#CZ Zpracovávané – MVK
+#EN In progress - MVK</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POTVRZENI_MVK">
+				<xs:annotation>
+					<xs:documentation>Potvrzení – MVK
+
+#CZ Potvrzení– MVK
+#EN Comfirmation - MVK</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZPRACOVANI_VK">
+				<xs:annotation>
+					<xs:documentation>Zpracovávané – vizuální kontrola
+
+#CZ Vizuální kontrola
+#EN Visual check</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOKONCENO">
+				<xs:annotation>
+					<xs:documentation>Dokončené
+
+#CZ Dokončené
+#EN Completed</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STORNO">
+				<xs:annotation>
+					<xs:documentation>Stornované
+
+#CZ Stornované
+#EN Canceled</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ODMITNUTO">
+				<xs:annotation>
+					<xs:documentation>Nezpracované s formátovými chybami
+
+#CZ Odmítnuté
+#EN Rejected</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INTERNI_CHYBA">
+				<xs:annotation>
+					<xs:documentation>Interní chyba
+
+#CZ Interní chyba
+#EN Internal error</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StavVyskytuVykazu">
+		<xs:annotation>
+			<xs:documentation>Stav výskytu výkazu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PLANOVANO">
+				<xs:annotation>
+					<xs:documentation>Plánovaný
+
+#CZ Plánovaný
+#EN Scheduled</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZPRACOVANI">
+				<xs:annotation>
+					<xs:documentation>Zpracovávaný
+
+#CZ Zpracovávaný
+#EN In Process</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PREDBEZNE_SPLNENO">
+				<xs:annotation>
+					<xs:documentation>Předběžně splněný
+
+#CZ Předběžně splněný
+#EN Pre-filled</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPLNENO">
+				<xs:annotation>
+					<xs:documentation>Splněný
+
+#CZ Splněný
+#EN Fulfilled</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NEDOKONCENO">
+				<xs:annotation>
+					<xs:documentation>Nedokončený
+
+#CZ Nedokončený
+#EN Unfinished</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StavProtokolu">
+		<xs:annotation>
+			<xs:documentation>Stavy protokolu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ZALOZENO">
+				<xs:annotation>
+					<xs:documentation>Založen
+
+#CZ Založen
+#EN Created</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ODESLANO">
+				<xs:annotation>
+					<xs:documentation>Odeslán
+
+#CZ Odeslán
+#EN Sent</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHYBA">
+				<xs:annotation>
+					<xs:documentation>Chyba
+
+#CZ Chyba
+#EN Error</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StavUpominky">
+		<xs:annotation>
+			<xs:documentation>Stav upomínky</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ZALOZENO">
+				<xs:annotation>
+					<xs:documentation>Založena
+
+#CZ Založena
+#EN Created</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ODESLANO">
+				<xs:annotation>
+					<xs:documentation>Odeslána
+
+#CZ Odeslána
+#EN Sent</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHYBA">
+				<xs:annotation>
+					<xs:documentation>Chyba
+
+#CZ Chyba
+#EN Error</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FormatProtokolu">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="XML">
+				<xs:annotation>
+					<xs:documentation>XML
+
+#CZ XML
+#EN XML</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISO20022">
+				<xs:annotation>
+					<xs:documentation>ISO20022
+
+#CZ ISO 20022
+#EN ISO 20022</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XBRL">
+				<xs:annotation>
+					<xs:documentation>XBRL
+
+#CZ XBRL
+#EN XBRL</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FormatVstupnichDat">
+		<xs:annotation>
+			<xs:documentation>Formát vstupních dat (tvořících obsah Vydání výskytu výkazu)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="XMLSDAT">
+				<xs:annotation>
+					<xs:documentation>XML SDAT
+
+#CZ XML
+#EN XML</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XBRL">
+				<xs:annotation>
+					<xs:documentation>XBRL
+
+#CZ XBRL
+#EN XBRL</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISO20022">
+				<xs:annotation>
+					<xs:documentation>ISO 20022
+
+#CZ ISO 20022
+#EN ISO 20022</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IXBRL">
+				<xs:annotation>
+					<xs:documentation>iXBRL
+
+#CZ iXBRL
+#EN iXBRL</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypProtokolu">
+		<xs:annotation>
+			<xs:documentation>Základní typy protokolů</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VZ">
+				<xs:annotation>
+					<xs:documentation>Protokol o přijetí Vstupní zprávy
+
+#CZ Vstupní zpráva
+#EN Input message</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VYD">
+				<xs:annotation>
+					<xs:documentation>Protokol o zpracování Vydání výskytu
+
+#CZ Vydání výkazu
+#EN Report release</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MVK">
+				<xs:annotation>
+					<xs:documentation>Protokol o zpracování MVK
+
+#CZ MVK
+#EN MVK</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubTypProtokolu">
+		<xs:annotation>
+			<xs:documentation>Podrobnější typy protokolů</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VYD_STAT">
+				<xs:annotation>
+					<xs:documentation>Protokol o zpracování Vydání výskytu statistického výkazu
+
+#CZ Protokol o zpracování vydání statistického výkazu
+#EN Protocol on processing of a statistical report release</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VYD_CIS">
+				<xs:annotation>
+					<xs:documentation>Protokol o zpracování Vydání výskytu číselníkového výkazu
+
+#CZ Protokol o zpracování vydání číselníkového výkazu
+#EN Protocol on processing of a code list report release</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VYD_TRAN">
+				<xs:annotation>
+					<xs:documentation>Protokol o zpracování Vydání výskytu transakčního výkazu
+
+#CZ Protokol o zpracování vydání transakčního výkazu
+#EN Protocol on processing of a transactional report release</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VYD_PR">
+				<xs:annotation>
+					<xs:documentation>Protokol o zpracování přílohy výkazu
+
+#CZ Protokol o zpracování přílohy výkazu
+#EN Protocol on processing of a attachment of report release</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VYD_STAT_OP">
+				<xs:annotation>
+					<xs:documentation>Protokol o opakovaném zpracování Vydání výskytu statistického výkazu
+
+#CZ Protokol o opakovaném zpracování vydání statistického výkazu
+#EN Protocol on repeat processing of a statistical report release</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VYD_TRAN_PT">
+				<xs:annotation>
+					<xs:documentation>Protokol o zpracování přijatých transakcí transakčního výkazu
+
+#CZ Protokol o zpracování přijatých transakcí transakčního výkazu
+#EN Protocol on processing of received transactions of a transactional report release</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VYD_TRAN_CT">
+				<xs:annotation>
+					<xs:documentation>Protokol o zpracování čekajících transakcí transakčního výkazu
+
+#CZ Protokol o zpracování čekajících transakcí transakčního výkazu
+#EN Protocol on processing of pending transactions of a transactional report release</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MVK_STAT">
+				<xs:annotation>
+					<xs:documentation>Protokol o zpracování mezivýkazových kontrol statistických výkazů
+
+#CZ Protokol o zpracování mezivýkazových kontrol statistických výkazů
+#EN Protocol on processing of cross validation rules of a statistical reports</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MVK_STAT_OP">
+				<xs:annotation>
+					<xs:documentation>Protokol o opakovaném zpracování mezivýkazových kontrol statistických výkazů
+
+#CZ Protokol o opakovaném zpracování mezivýkazových kontrol statistických výkazů
+#EN Protocol on repeat processing of cross validation rules of a statistical reports</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MVK_TRAN">
+				<xs:annotation>
+					<xs:documentation>Protokol o zpracování mezivýkazových kontrol transakčních výkazů
+
+#CZ Protokol o zpracování mezivýkazových kontrol transakčních výkazů
+#EN Protocol on processing of cross validation rules of a transactional reports</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypKomprese">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GZIP"/>
+			<xs:enumeration value="ZIP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypOtisku">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SHA256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypExterniMetodiky">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EBA">
+				<xs:annotation>
+					<xs:documentation>EBA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EIOPA">
+				<xs:annotation>
+					<xs:documentation>EIOPA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ESMA">
+				<xs:annotation>
+					<xs:documentation>ESMA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Periodicita">
+		<xs:annotation>
+			<xs:documentation>#CZ Periodicita
+#EN Periodicity
+Periodicita vykazovací povinnosti</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DEN">
+				<xs:annotation>
+					<xs:documentation>#CZ Denní
+#EN Daily
+Denní periodicita</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TYDEN">
+				<xs:annotation>
+					<xs:documentation>#CZ Týdenní
+#EN Weekly
+Týdenní periodicita</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEKADA">
+				<xs:annotation>
+					<xs:documentation>#CZ Dekádní
+#EN Decade
+Dekádní  periodicita</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MESIC">
+				<xs:annotation>
+					<xs:documentation>#CZ Měsíční
+#EN Monthly
+Měsíční periodicita</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KVARTAL">
+				<xs:annotation>
+					<xs:documentation>#CZ Čtvrtletní
+#EN Quarterly
+Čtvrtletní periodicita</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POLOLETI">
+				<xs:annotation>
+					<xs:documentation>#CZ Pololetní
+#EN Semi-annually
+Pololetní periodicita</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ROK">
+				<xs:annotation>
+					<xs:documentation>#CZ Roční
+#EN Yearly
+Roční periodicita</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NEPRAVIDELNA">
+				<xs:annotation>
+					<xs:documentation>#CZ Nepravidelná
+#EN Irregular
+Nepravidelná</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StavVstupniZpravy">
+		<xs:annotation>
+			<xs:documentation>Stav Vstupní zprávy</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PRIJATO">
+				<xs:annotation>
+					<xs:documentation>Přijatá
+
+#CZ Přijatá
+#EN Received</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZPRACOVANI">
+				<xs:annotation>
+					<xs:documentation>Předána do zpracování
+
+#CZ Předána do zpracování
+#EN Into progress</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOKONCENO">
+				<xs:annotation>
+					<xs:documentation>Dokončené
+
+#CZ Dokončené
+#EN Completed</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ODMITNUTO">
+				<xs:annotation>
+					<xs:documentation>Odmítnuta
+
+#CZ Odmítnuta
+#EN Rejected</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VysledekProtokolu">
+		<xs:annotation>
+			<xs:documentation>Typ souhrrných výsledků zpracování pro uvedení v Protokolu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEAKCEPTOVANO">
+				<xs:annotation>
+					<xs:documentation>Neakceptováno
+
+#CZ Neakceptováno
+#EN Not accepted</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POTVRZENI">
+				<xs:annotation>
+					<xs:documentation>Požadováno potvrdit
+
+#CZ Požadováno potvrdit
+#EN Required to confirm</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAROVANI">
+				<xs:annotation>
+					<xs:documentation>Akceptováno s varováním
+
+#CZ Akceptováno s varováním
+#EN Accepted with warning</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CASTECNE">
+				<xs:annotation>
+					<xs:documentation>Akceptováno částečně
+
+#CZ Akceptováno částečně
+#EN Partially accepted</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AKCEPTOVANO">
+				<xs:annotation>
+					<xs:documentation>Akceptováno
+
+#CZ Akceptováno
+#EN Accepted</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypVykazu">
+		<xs:annotation>
+			<xs:documentation>Typ výkazu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="STAT">
+				<xs:annotation>
+					<xs:documentation>Statistický
+                    
+#CZ Statistický
+#EN Statistical</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CIS">
+				<xs:annotation>
+					<xs:documentation>Číselníkový
+
+#CZ Číselníkový
+#EN List</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TRAN">
+				<xs:annotation>
+					<xs:documentation>Transakční
+
+#CZ Transakční
+#EN Transactional</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StavZaznamu">
+		<xs:annotation>
+			<xs:documentation>Stavy zpracování záznamů (transakčních a číselníkových) výkazů</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ODMITNUTO">
+				<xs:annotation>
+					<xs:documentation>Odmítnuto
+
+#CZ Odmítnuto
+#EN Rejected</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CEKAJICI">
+				<xs:annotation>
+					<xs:documentation>Čekající
+
+#CZ Čekající
+#EN Pending</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AKCEPTOVANO">
+				<xs:annotation>
+					<xs:documentation>Akceptováno
+
+#CZ Akceptováno
+#EN Accepted</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OpakovaniKontroly">
+		<xs:annotation>
+			<xs:documentation>Důvody opakování kontrol</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RIAD">
+				<xs:annotation>
+					<xs:documentation>Opakování po aktualizaci RIAD
+
+#CZ RIAD
+#EN RIAD</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>			
+			<xs:enumeration value="FIRDS">
+				<xs:annotation>
+					<xs:documentation>Opakování po aktualizaci FIRDS číselníků
+
+#CZ FIRDS
+#EN FIRDS</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>      
+		</xs:restriction>
+	</xs:simpleType>
+  <xs:simpleType name="StavPlanuSkupinyMvk">
+		<xs:annotation>
+			<xs:documentation>Stav plánu skupiny MVK</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PLANOVANO">
+				<xs:annotation>
+					<xs:documentation>Plánovaný
+
+#CZ Plánovaný
+#EN Scheduled</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZPRACOVANI">
+				<xs:annotation>
+					<xs:documentation>Zpracovávaný
+
+#CZ Zpracovávaný
+#EN In Process</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>			
+			<xs:enumeration value="SPLNENO">
+				<xs:annotation>
+					<xs:documentation>Splněný
+
+#CZ Splněný
+#EN Fulfilled</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+      <xs:enumeration value="SPLNENO_UZAVRENO">
+				<xs:annotation>
+					<xs:documentation>Splněný
+
+#CZ Splněný - uzavřený
+#EN Fulfilled - closed</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NEDOKONCENO">
+				<xs:annotation>
+					<xs:documentation>Nedokončený
+
+#CZ Nedokončený
+#EN Unfinished</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+      <xs:enumeration value="NEDOKONCENO_UZAVRENO">
+				<xs:annotation>
+					<xs:documentation>Nedokončený
+
+#CZ Nedokončený - uzavřený
+#EN Unfinished - closed</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+      <xs:enumeration value="INTERNI_CHYBA">
+				<xs:annotation>
+					<xs:documentation>Interní chyba
+
+#CZ Interní chyba
+#EN Internal error</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

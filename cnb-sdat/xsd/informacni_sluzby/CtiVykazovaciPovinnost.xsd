@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:CtiVykazovaciPovinnost:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:CtiVykazovaciPovinnost:v1" xmlns:cvp="urn:cz:cnb:sdat:schemas:CtiVykazovaciPovinnost:v1" xmlns:sys="urn:cz:cnb:sdat:schemas:SystemTypy:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" version="1.0.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" schemaLocation="../common/SpolecneTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="../common/DatoveTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SystemTypy:v1" schemaLocation="../common/SystemTypy.xsd"/>
+	<xs:complexType name="CtiVykazovaciPovinnostResponseType">
+		<xs:sequence>
+			<xs:element name="OdpovedInfo" type="sys:OdpovedInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiVykazovaciPovinnostDotazType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Odpoved" type="CtiVykazovaciPovinnostOdpovedType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiVykazovaciPovinnostRequestType">
+		<xs:sequence>
+			<xs:element name="ZadostInfo" type="sys:ZadostInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiVykazovaciPovinnostDotazType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CtiVykazovaciPovinnostRequest" type="cvp:CtiVykazovaciPovinnostRequestType"/>
+	<xs:element name="CtiVykazovaciPovinnostResponse" type="cvp:CtiVykazovaciPovinnostResponseType"/>
+	<xs:complexType name="CtiVykazovaciPovinnostDotazType">
+		<xs:sequence>
+			<xs:element name="OsobaKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RoleOsoby" type="com:RoleOsoby" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VykazovaciRamecKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VykazKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostDo" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiVykazovaciPovinnostOdpovedType">
+		<xs:sequence>
+			<xs:element name="VykazovaciPovinnost" type="VykazovaciPovinnostType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VykazovaciPovinnostType">
+		<xs:sequence>
+			<xs:element name="VykazovaciRamecPlan" type="VykazovaciRamecPlanType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VykazovaciRamecPlanType">
+		<xs:sequence>
+			<xs:element name="VykazovaciRamecKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VyskytVykazuPlan" type="VyskytVykazuType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VyskytVykazuType">
+		<xs:sequence>
+			<xs:element name="Periodicita" type="com:Periodicita" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VykazKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VykazujiciOsobaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StavKeDni" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Rozsah" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TerminPredlozeni" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TerminUzavreni" type="dt:DT_TIME" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VyjimkaDO" type="VyjimkaDOType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VyjimkaJvk" type="VyjimkaKontrolaType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VyjimkaMvk" type="VyjimkaMvkType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VyjimkaDOType">
+		<xs:sequence>
+			<xs:element name="DatovaOblastKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VyjimkaKontrolaType">
+		<xs:sequence>
+			<xs:element name="KontrolaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Provadet" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Zavaznost" type="com:ZavaznostKontroly" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VyjimkaMvkType">
+		<xs:sequence>
+			<xs:element name="SkupinaMvkKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Provadet" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Kontrola" type="VyjimkaKontrolaType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

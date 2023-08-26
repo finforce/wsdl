@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="urn:cz:cnb:sdat:services:CtiVykazovaciPovinnost:v1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ctiVykazovaciPovinnost="urn:cz:cnb:sdat:schemas:CtiVykazovaciPovinnost:v1"
+	xmlns:tns="urn:cz:cnb:sdat:services:CtiVykazovaciPovinnost:v1">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="urn:cz:cnb:sdat:schemas:CtiVykazovaciPovinnost:v1" schemaLocation="../xsd/informacni_sluzby/CtiVykazovaciPovinnost.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ctiVykazovaciPovinnostRequest">
+    <wsdl:part element="ctiVykazovaciPovinnost:CtiVykazovaciPovinnostRequest" name="ctiVykazovaciPovinnostRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ctiVykazovaciPovinnostResponse">
+    <wsdl:part element="ctiVykazovaciPovinnost:CtiVykazovaciPovinnostResponse" name="ctiVykazovaciPovinnostResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CtiVykazovaciPovinnost">
+    <wsdl:operation name="CtiVykazovaciPovinnost">
+      <wsdl:input message="tns:ctiVykazovaciPovinnostRequest" name="ctiVykazovaciPovinnostRequest"/>
+      <wsdl:output message="tns:ctiVykazovaciPovinnostResponse" name="ctiVykazovaciPovinnostResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CtiVykazovaciPovinnostBinding" type="tns:CtiVykazovaciPovinnost">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CtiVykazovaciPovinnost">
+      <soap:operation soapAction="http://sdat.cnb.cz/CtiVykazovaciPovinnost"/>
+      <wsdl:input name="ctiVykazovaciPovinnostRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ctiVykazovaciPovinnostResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CtiVykazovaciPovinnostService">
+    <wsdl:port binding="tns:CtiVykazovaciPovinnostBinding" name="CtiVykazovaciPovinnostPort">
+      <soap:address location="http://localhost/sdat_ws/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="urn:cz:cnb:sdat:services:CtiSeznamVykazu:v1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ctiSeznamVykazu="urn:cz:cnb:sdat:schemas:CtiSeznamVykazu:v1"
+	xmlns:tns="urn:cz:cnb:sdat:services:CtiSeznamVykazu:v1">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="urn:cz:cnb:sdat:schemas:CtiSeznamVykazu:v1" schemaLocation="../xsd/informacni_sluzby/CtiSeznamVykazu.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ctiSeznamVykazuRequest">
+    <wsdl:part element="ctiSeznamVykazu:CtiSeznamVykazuRequest" name="ctiSeznamVykazuRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ctiSeznamVykazuResponse">
+    <wsdl:part element="ctiSeznamVykazu:CtiSeznamVykazuResponse" name="ctiSeznamVykazuResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CtiSeznamVykazu">
+    <wsdl:operation name="CtiSeznamVykazu">
+      <wsdl:input message="tns:ctiSeznamVykazuRequest" name="ctiSeznamVykazuRequest"/>
+      <wsdl:output message="tns:ctiSeznamVykazuResponse" name="ctiSeznamVykazuResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CtiSeznamVykazuBinding" type="tns:CtiSeznamVykazu">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CtiSeznamVykazu">
+      <soap:operation soapAction="http://sdat.cnb.cz/CtiSeznamVykazu"/>
+      <wsdl:input name="ctiSeznamVykazuRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ctiSeznamVykazuResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CtiSeznamVykazuService">
+    <wsdl:port binding="tns:CtiSeznamVykazuBinding" name="CtiSeznamVykazuPort">
+      <soap:address location="http://localhost/sdat_ws/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

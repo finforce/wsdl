@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="urn:cz:cnb:sdat:services:CtiUdajeOsoby:v1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ctiUdajeOsoby="urn:cz:cnb:sdat:schemas:CtiUdajeOsoby:v1"
+	xmlns:tns="urn:cz:cnb:sdat:services:CtiUdajeOsoby:v1">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="urn:cz:cnb:sdat:schemas:CtiUdajeOsoby:v1" schemaLocation="../xsd/informacni_sluzby/CtiUdajeOsoby.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ctiUdajeOsobyRequest">
+    <wsdl:part element="ctiUdajeOsoby:CtiUdajeOsobyRequest" name="ctiUdajeOsobyRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ctiUdajeOsobyResponse">
+    <wsdl:part element="ctiUdajeOsoby:CtiUdajeOsobyResponse" name="ctiUdajeOsobyResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CtiUdajeOsoby">
+    <wsdl:operation name="CtiUdajeOsoby">
+      <wsdl:input message="tns:ctiUdajeOsobyRequest" name="ctiUdajeOsobyRequest"/>
+      <wsdl:output message="tns:ctiUdajeOsobyResponse" name="ctiUdajeOsobyResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CtiUdajeOsobyBinding" type="tns:CtiUdajeOsoby">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CtiUdajeOsoby">
+      <soap:operation soapAction="http://sdat.cnb.cz/CtiUdajeOsoby"/>
+      <wsdl:input name="ctiUdajeOsobyRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ctiUdajeOsobyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CtiUdajeOsobyService">
+    <wsdl:port binding="tns:CtiUdajeOsobyBinding" name="CtiUdajeOsobyPort">
+      <soap:address location="http://localhost/sdat_ws/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

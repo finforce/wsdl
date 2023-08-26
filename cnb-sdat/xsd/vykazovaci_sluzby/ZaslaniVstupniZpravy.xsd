@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:ZaslaniVstupniZpravy:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:ZaslaniVstupniZpravy:v1" xmlns:zvz="urn:cz:cnb:sdat:schemas:ZaslaniVstupniZpravy:v1" xmlns:zpr="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" xmlns:sys="urn:cz:cnb:sdat:schemas:SystemTypy:v1" xmlns:sp="urn:cz:cnb:sdat:schemas:SpecialniTypy:v1" version="1.0.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpecialniTypy:v1" schemaLocation="../common/SpecialniTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SystemTypy:v1" schemaLocation="../common/SystemTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" schemaLocation="../common/SpolecneTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="../common/DatoveTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" schemaLocation="../common/ZpracovaniTypy.xsd"/>
+	<xs:element name="DataFormatSdatXml" type="zvz:DataXmlType"/>
+	<xs:complexType name="SloupecExType">
+		<xs:sequence>
+			<xs:element name="Hodnota" type="Hodnota" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Atribut" type="AtributType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Kod" use="required" type="dt:DT_TEXT6"/>
+		<xs:attribute name="Poradi" use="optional" type="dt:DT_INT9"/>
+	</xs:complexType>
+	<xs:complexType name="HlavickaZpravyType">
+		<xs:sequence>
+			<xs:element name="ReferencniId" type="dt:DT_TEXT30" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZasilajiciOsoba" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DatumVytvoreni" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Podpis" type="com:PodpisType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ZaslaniVstupniZpravyRequest" type="zvz:ZaslaniVstupniZpravyRequestType"/>
+	<xs:complexType name="VstupniZpravaType">
+		<xs:sequence>
+			<xs:element name="HlavickaZpravy" type="HlavickaZpravyType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TeloZpravy" type="TeloZpravyType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VydaniType">
+		<xs:sequence>
+			<xs:element name="HlavickaVydani" type="zpr:HlavickaVydaniType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DataVydani" type="DataVydaniType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataVydaniType">
+		<xs:choice>
+			<xs:element name="DataFormatSdatXml" type="DataXmlType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DataFormatOstatni" type="dt:DT_BLOB" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DataFormatOstatniPrilohy" type="DataOstatniPrilohyType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DataSouborExt" type="DataExterniType" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DataExterniType">
+		<xs:sequence>
+			<xs:element name="Soubor" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="OtiskSouboru" type="com:OtiskType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TypKomprese" type="com:TypKomprese" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataXmlType">
+		<xs:sequence>
+			<xs:element name="Priloha" type="PrilohaType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="DatoveOblasti" type="DatoveOblastiType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataOstatniPrilohyType">
+		<xs:sequence>
+			<xs:element name="DataFormatOstatni" type="dt:DT_BLOB" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Priloha" type="PrilohaType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KartaType">
+		<xs:sequence>
+			<xs:element name="Parametr" type="ParametrType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Ra" type="RadekType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Kod" use="required" type="dt:DT_TEXT6"/>
+		<xs:attribute name="Poradi" use="optional" type="dt:DT_INT9"/>
+	</xs:complexType>
+	<xs:complexType name="KartaKompType">
+		<xs:sequence>
+			<xs:element name="Parametr" type="ParametrType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="R" type="RadekKompType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Kod" use="required" type="dt:DT_TEXT6"/>
+		<xs:attribute name="Poradi" use="optional" type="dt:DT_INT9"/>
+	</xs:complexType>
+	<xs:complexType name="DataDoKartType">
+		<xs:choice minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="Karta" type="KartaType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="KartaKomp" type="KartaKompType" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+		<xs:attribute name="Kod" use="required" type="dt:DT_KOD"/>
+	</xs:complexType>
+	<xs:complexType name="DatoveOblastiType">
+		<xs:choice minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="DataDoKomp" type="DataDoKompType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DataDoKart" type="DataDoKartType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DataDo" type="DataDoType" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="PrilohaType">
+		<xs:sequence>
+			<xs:element name="TypPrilohy" type="com:TypPrilohy" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DoKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Obsah" type="dt:DT_BLOB" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ZaslaniVstupniZpravyRequestType">
+		<xs:sequence>
+			<xs:element name="ZadostInfo" type="sys:ZadostInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Zadost" type="ZaslaniVstupniZpravyZadostType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ZaslaniVstupniZpravyZadostType">
+		<xs:sequence>
+			<xs:element name="VstupniZprava" type="VstupniZpravaType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataVstupniZpravyType">
+		<xs:sequence>
+			<xs:element name="Vydani" type="VydaniType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DataVstupniZpravy" type="zvz:DataVstupniZpravyType"/>
+	<xs:complexType name="DataDoType">
+		<xs:sequence>
+			<xs:element name="Ra" type="RadekType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Kod" use="required" type="dt:DT_KOD"/>
+	</xs:complexType>
+	<xs:complexType name="DataDoKompType">
+		<xs:sequence>
+			<xs:element name="R" type="RadekKompType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Kod" use="required" type="dt:DT_KOD"/>
+	</xs:complexType>
+	<xs:complexType name="ParametrType">
+		<xs:sequence/>
+		<xs:attribute name="Kod" use="required" type="dt:DT_TEXT100"/>
+		<xs:attribute name="Hodnota" use="required" type="dt:DT_TEXT4000"/>
+	</xs:complexType>
+	<xs:complexType name="RadekType">
+		<xs:choice minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="Sl" type="SloupecType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="SlEx" type="SloupecExType" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+		<xs:attribute name="Kod" use="required" type="dt:DT_TEXT6"/>
+		<xs:attribute name="Poradi" use="optional" type="dt:DT_INT9"/>
+	</xs:complexType>
+	<xs:complexType name="SloupecType">
+		<xs:simpleContent>
+			<xs:extension base="Hodnota">
+				<xs:attribute name="Kod" use="required" type="dt:DT_TEXT6"/>
+				<xs:attribute name="Poradi" use="optional" type="dt:DT_INT9"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="RadekKompType">
+		<xs:choice minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="S" type="SloupecKompType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="SE" type="SloupecKompExType" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="AtributType">
+		<xs:sequence/>
+		<xs:attribute name="Kod" use="required" type="dt:DT_TEXT100"/>
+		<xs:attribute name="Hodnota" use="required" type="dt:DT_TEXT4000"/>
+	</xs:complexType>
+	<xs:complexType name="SloupecKompType">
+		<xs:simpleContent>
+			<xs:extension base="Hodnota"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="Hodnota">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TeloZpravyType">
+		<xs:sequence>
+			<xs:element name="VlozenaData" type="sp:VlozenaDataType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ZaslaniVstupniZpravyResponseType">
+		<xs:sequence>
+			<xs:element name="OdpovedInfo" type="sys:OdpovedInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Odpoved" type="ZaslaniVstupniZpravyOdpovedType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ZaslaniVstupniZpravyOdpovedType">
+		<xs:sequence>
+			<xs:element name="ReferencniId" type="dt:DT_TEXT30" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZasilajiciOsoba" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="OtiskVstupniZpravy" type="com:OtiskType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VysledekPrijeti" type="VysledekPrijetiType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ZaslaniVstupniZpravyResponse" type="zvz:ZaslaniVstupniZpravyResponseType"/>
+	<xs:complexType name="VysledekPrijetiType">
+		<xs:sequence>
+			<xs:element name="Vysledek" type="com:StavVstupniZpravy" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VstupniZpravaId" type="dt:DT_ID" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ZjisteneChyby" type="zpr:SeznamChybType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SloupecKompExType">
+		<xs:sequence>
+			<xs:element name="Hodnota" type="Hodnota" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Atribut" type="AtributType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="VstupniZprava" type="zvz:VstupniZpravaType"/>
+</xs:schema>

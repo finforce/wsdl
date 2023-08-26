@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:SystemTypy:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:SystemTypy:v1" xmlns:sys="urn:cz:cnb:sdat:schemas:SystemTypy:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" version="1.0.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="DatoveTypy.xsd"/>
+	<xs:simpleType name="CasovaZnackaType">
+		<xs:annotation>
+			<xs:documentation>Časová značka záznamů v žádosti nebo dotazu a odpovědi (do úrovně milisekund).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="VerzeType">
+		<xs:annotation>
+			<xs:documentation>Verze XML dokumentu (SOAP zprávy, tedy žádosti nebo dotazu a odpovědi).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{1,3}\.\d{1,3}\.\d{1,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UuidType">
+		<xs:annotation>
+			<xs:documentation>UUID - 36 znaku, AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE - základ dalších identifikátorů.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ZadostInfoType">
+		<xs:annotation>
+			<xs:documentation>Společná hlavička všech žádostí nebo dotazů (webových služeb).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CasZadosti" type="CasovaZnackaType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZadostId" type="UuidType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VerzeZadosti" type="VerzeType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="OsobaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Uzivatel" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="PredchoziZadostId" type="UuidType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>?? Asi je možné zrušit, zatím to vypadá, že nebude mít uplatnění. Návaznost bude zabezpečena jen podle času.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OdpovedInfoType">
+		<xs:annotation>
+			<xs:documentation>Společná hlavička všech odpovědí WS</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CasOdpovedi" type="CasovaZnackaType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZadostId" type="UuidType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VerzeSluzby" type="VerzeType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Status" type="StatusType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="VysledekPopisType">
+		<xs:annotation>
+			<xs:documentation>Aplikační status provedení požadované operace - upřesnění.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1024"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VysledekKodType">
+		<xs:annotation>
+			<xs:documentation>Kód výsledku, výčtový typ indikující v zásadě OK a CHYBA.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OK"/>
+			<xs:enumeration value="CHYBA"/>
+			<xs:enumeration value="VAROVANI"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VysledekSubKodType">
+		<xs:annotation>
+			<xs:documentation>Detailní kód výsledku, výčtový typ nebo odkaz na popis.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PREKROCEN_CAS">
+				<xs:annotation>
+					<xs:documentation>Je překročen čas pro zpracování (podle konfigurace nebo autorizačního omezení).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PREKROCEN_ROZSAH">
+				<xs:annotation>
+					<xs:documentation>Je překročen rozsah požadované odpovědi (podle konfigurace).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NENI_OPRAVNENI">
+				<xs:annotation>
+					<xs:documentation>Není oprávnění k požadované službě.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NEPLATNY_CAS">
+				<xs:annotation>
+					<xs:documentation>Čas dotazu je mimo povolenou toleranci (podle konfigurace).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STARSI_VERZE">
+				<xs:annotation>
+					<xs:documentation>Verze (SOAP) dotazu/žádosti se liší minoritně od současné verze služeb.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NEPLATNA_VERZE">
+				<xs:annotation>
+					<xs:documentation>Verze (SOAP) dotazu/žádosti se liší majoritně od současné verze služeb.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DUPLICITNI_ZADOST">
+				<xs:annotation>
+					<xs:documentation>Identifikátor žádosti byl přiřazen žádosti v minulosti.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NENI_IMPLEMENTOVANO">
+				<xs:annotation>
+					<xs:documentation>Služba není implementována.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NENI_K_DISPOZICI">
+				<xs:annotation>
+					<xs:documentation>Služba není dočasně k dispozici.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPECIFIKACE_V_POPISU">
+				<xs:annotation>
+					<xs:documentation>Obecná chyba, která je blíže specifikována v popisu </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="StatusType">
+		<xs:annotation>
+			<xs:documentation>Systémový status provedení požadované operace (volání webové služby).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="VysledekKod" type="VysledekKodType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VysledekDetail" type="VysledekDetailType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CertifikatIdType">
+		<xs:annotation>
+			<xs:documentation>Zvážit, zda bude pro identifikaci stačit Sériové číslo.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SerioveCislo" type="dt:DT_TEXT30" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VysledekDetailType">
+		<xs:sequence>
+			<xs:element name="VysledekSubKod" type="VysledekSubKodType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VysledekPopis" type="VysledekPopisType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

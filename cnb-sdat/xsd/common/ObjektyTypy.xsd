@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:ObjektyTypy:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:ObjektyTypy:v1" xmlns:obj="urn:cz:cnb:sdat:schemas:ObjektyTypy:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" version="1.1.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" schemaLocation="SpolecneTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="DatoveTypy.xsd"/>
+	<xs:group name="AtributyObjektu">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Akronym" type="dt:DT_TEXT100" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Verze" type="dt:DT_TEXT7" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Modifikace" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Stav" type="com:StavyStandardni" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Poznamka" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:complexType name="VazbaNaUctyType">
+		<xs:sequence>
+			<xs:element name="UctovaOsnovaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="UcetKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Znamenko" type="com:ZnamenkoZarazeniUctu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Zpusob" type="com:ZpusobyZarazeniUctu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TypZarazeni" type="com:TypyZarazeniUctu" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Rozsah" type="com:RozsahyZarazeniUctu" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UctySeznamType">
+		<xs:sequence>
+			<xs:element name="Ucet" type="UcetType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UcetType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Uroven" type="com:UrovenUctu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Typ" type="com:TypUctu" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Poznamka" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HodnotaAtributuType">
+		<xs:choice>
+			<xs:element name="HodnotaCislo" type="dt:DT_NUMVAL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="HodnotaText" type="dt:DT_TEXT4000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="HodnotaDatum" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="HodnotaZdrojType">
+		<xs:choice>
+			<xs:element name="PolozkaCiselnikuKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DomenaCiselnikuKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="HierarchieCiselnikuKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DatovyTypKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="HodnotaParametruDoType">
+		<xs:sequence>
+			<xs:element name="ParametrKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Hodnota" type="dt:DT_TEXT4000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Typ" type="com:TypHodnotyVektoru" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dynamicky" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="HodnotaZdroj" type="HodnotaZdrojType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="SouradniceParametru" type="SouradniceType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="JePovinny" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KonkretizaceParametruType">
+		<xs:sequence>
+			<xs:element name="ParametrKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PolozkaCiselnikuKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PolozkyHierarchieSeznamType">
+		<xs:sequence>
+			<xs:element name="PolozkaHierarchie" type="PolozkaHierarchieType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HierarchieType">
+		<xs:sequence>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ObsahHierarchie" type="PolozkyHierarchieSeznamType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DomenaType">
+		<xs:sequence>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="HierarchieKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="UzelPolozkaCiselnikuKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ObsahDomeny" type="PolozkyDomenySeznamType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PolozkyDomenySeznamType">
+		<xs:sequence>
+			<xs:element name="PolozkaDomeny" type="PolozkaDomenyType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PolozkaHierarchieType">
+		<xs:sequence>
+			<xs:element name="Poradi" type="dt:DT_INT6" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="RodicPolozkaCiselnikuKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="PotomekPolozkaCiselnikuKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PolozkaDomenyType">
+		<xs:sequence>
+			<xs:element name="Poradi" type="dt:DT_INT6" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Pouzita" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TypRozpadu" type="com:TypRozpaduHierarchie" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Vaha" type="dt:DT_VAHA" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="RodicPolozkaCiselnikuKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="PotomekPolozkaCiselnikuKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DomenyCiselnikuSeznamType">
+		<xs:sequence>
+			<xs:element name="Domena" type="DomenaType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HierarchieCiselnikuSeznamType">
+		<xs:sequence>
+			<xs:element name="Hierarchie" type="HierarchieType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SkupinyMvkSeznamType">
+		<xs:sequence>
+			<xs:element name="SkupinaMvk" type="SkupinaMvkType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KontrolaType">
+		<xs:annotation>
+			<xs:documentation>Kontrola</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ZakladniTyp" type="com:ZakladniTypKontroly" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostDo" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Modifikace" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Poznamka" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Zavaznost" type="com:ZavaznostKontroly" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Deaktivovana" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="SemantickyTvar" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="UzivatelskyTvar" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Predpoklad" type="dt:DT_TEXT4000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DeaktivaceOd" type="dt:DT_DATE" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ReaktivaceOd" type="dt:DT_DATE" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="SkupinaKontrolKod" type="dt:DT_TEXT100" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Opakovat" type="com:OpakovaniKontroly" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VysledekChyba" type="dt:DT_TEXT100" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ClenMvkType">
+		<xs:sequence>
+			<xs:element name="VykazKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Vlastnik" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TypObdobi" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Obdobi" type="dt:DT_SINT3" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ShodaData" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Tolerance" type="dt:DT_SINT3" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SkupinaMvkType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Modifikace" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Poznamka" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="KontrolySkupinyMvk" type="KontrolySeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VykazySkupinyMvk" type="VykazyMvkSeznamType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SdileneUdajeType">
+		<xs:sequence>
+			<xs:element name="SdilenyUdaj" type="SdilenyUdajType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SdilenyUdajType">
+		<xs:sequence>
+			<xs:element name="DatovaOblastKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Vykazovany" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="SouradniceUdaje" type="SouradniceType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PolozkyPrevodnikuType">
+		<xs:sequence>
+			<xs:element name="PolozkaPrevodniku" type="PolozkaPrevodnikuType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UctovaOsnovaType">
+		<xs:sequence>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="UctyOsnovy" type="UctySeznamType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatovyTypType">
+		<xs:sequence>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZakladniDt" type="com:ZakladniDatoveTypy" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Delka" type="dt:DT_INT4" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DolniMez" type="dt:DT_TEXT4000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="HorniMez" type="dt:DT_TEXT4000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DesetinyMin" type="dt:DT_INT2" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DesetinyMax" type="dt:DT_INT2" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Nasobek" type="com:Nasobek" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Maska" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RegVyraz" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Jednotka" type="dt:DT_TEXT30" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DefaultniHodnota" type="dt:DT_TEXT4000" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AtributUdajeDoType">
+		<xs:sequence>
+			<xs:element name="AtributKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="JePovinny" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Příznak, zda je hodnota atributu povinná.
+
+#CZ Povinný
+#EN Mandatory</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DefaultniHodnota" type="dt:DT_TEXT4000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ParametrKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DefaultniHodnotaPro" type="dt:DT_TEXT100" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AtributyUdajuSeznamType">
+		<xs:sequence>
+			<xs:element name="AtributUdaju" type="AtributUdajuType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AtributUdajuType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kód
+
+#CZ Kód
+#EN Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Nazev" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Název primární
+
+#CZ Název primární
+#EN Name primary</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ZakladniDt" type="com:ZakladniDatoveTypy2" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Základní datový typ
+
+#CZ Základní DT
+#EN Basic DT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HodnotyParametruUdajeType">
+		<xs:sequence>
+			<xs:element name="ParametrUdaje" type="HodnotaParametruUdajeType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HodnotaParametruUdajeType">
+		<xs:sequence>
+			<xs:element name="ParametrKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Hodnota" type="dt:DT_TEXT4000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Typ" type="com:TypHodnotyVektoru" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dynamicky" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="HodnotaZdroj" type="HodnotaZdrojType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SouradniceType">
+		<xs:sequence>
+			<xs:element name="OsaX" type="dt:DT_TEXT6" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="OsaY" type="dt:DT_TEXT6" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="OsaZ" type="dt:DT_TEXT6" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PolozkyCiselnikuSeznamType">
+		<xs:sequence>
+			<xs:element name="PolozkaCiselniku" type="PolozkaCiselnikuType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PolozkaCiselnikuType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Souctova" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="SeznamElementarnichPolozek" type="com:SeznamKoduType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Vychozi" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Ukoncen" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Poznamka" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Nepovinné!</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DynamickeAtributyPolozky" type="DynamickeAtributyPolozkySeznamType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DynamickeAtributySeznamType">
+		<xs:sequence>
+			<xs:element name="DynamickyAtribut" type="DynamickyAtributType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DynamickyAtributType">
+		<xs:sequence>
+			<xs:element name="Poradi" type="dt:DT_INT3" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Povinny" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Jedinecny" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZakladniDT" type="com:ZakladniDatoveTypy2" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VychoziHodnota" type="HodnotaAtributuType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DynamickeAtributyPolozkySeznamType">
+		<xs:sequence>
+			<xs:element name="DynamickyAtributPolozky" type="DynamickyAtributPolozkyType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DynamickyAtributPolozkyType">
+		<xs:sequence>
+			<xs:element name="KodAtributu" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="HodnotaAtributu" type="HodnotaAtributuType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrevodnikType">
+		<xs:sequence>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZdrojovyCiselnikKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="CilovyCiselnikKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ObsahPrevodniku" type="PolozkyPrevodnikuType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PolozkaPrevodnikuType">
+		<xs:sequence>
+			<xs:element name="ZdrojovaPolozkaCiselnikuKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="CilovaPolozkaCiselnikuKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KnihovnaType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Verze" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Poznamka" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Ciselniky" type="CiselnikySeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DatoveTypy" type="DatoveTypySeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="UctoveOsnovy" type="UctovaOsnovaSeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Parametry" type="ParametrySeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Ukazatele" type="UkazateleSeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Prevodniky" type="PrevodnikySeznamType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CiselnikySeznamType">
+		<xs:sequence>
+			<xs:element name="Ciselnik" type="CiselnikType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrevodnikySeznamType">
+		<xs:sequence>
+			<xs:element name="Prevodnik" type="PrevodnikType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatoveTypySeznamType">
+		<xs:sequence>
+			<xs:element name="DatovyTyp" type="DatovyTypType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UctovaOsnovaSeznamType">
+		<xs:sequence>
+			<xs:element name="UctovaOsnova" type="UctovaOsnovaType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ParametrySeznamType">
+		<xs:sequence>
+			<xs:element name="Parametr" type="ParametrType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UkazateleSeznamType">
+		<xs:sequence>
+			<xs:element name="Ukazatel" type="UkazatelType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CiselnikType">
+		<xs:sequence>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DynamickeAtributyCiselniku" type="DynamickeAtributySeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ObsahCiselniku" type="PolozkyCiselnikuSeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DomenyCiselniku" type="DomenyCiselnikuSeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="HierarchieCiselniku" type="HierarchieCiselnikuSeznamType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VykazovaciRamecType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Poznamka" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Metodika" type="MetodikaType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Vykaz" type="VykazType" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="SkupinyMvk" type="SkupinyMvkSeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AtributyUdaju" type="AtributyUdajuSeznamType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MetodikaType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Stav" type="com:StavyMetodiky" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Popis" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Poznamka" type="dt:DT_LONG_TEXT" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Knihovna" type="KnihovnaType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VykazType">
+		<xs:sequence>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Garant" type="dt:DT_TEXT50" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZpusobPodepsani" type="com:ZpusobPodepsani" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Blok" type="BlokType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="StrukturaVykazu" type="dt:DT_BLOB" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="KontrolyVykazu" type="KontrolySeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="TypVykazu" type="com:TypVykazu" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="VykazovaciRamec" type="obj:VykazovaciRamecType"/>
+	<xs:complexType name="BlokType">
+		<xs:sequence>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DatovaOblast" type="DatovaOblastType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatovaOblastType">
+		<xs:sequence>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Typ" type="com:TypDatoveOblasti" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ParametryDatoveOblasti" type="HodnotyParametruDoType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="UdajeDatoveOblasti" type="UdajeSeznamType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="StrukturaDatoveOblasti" type="StrukturaDoType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Povinnost" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UdajeSeznamType">
+		<xs:sequence>
+			<xs:element name="Udaj" type="UdajType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KontrolySeznamType">
+		<xs:sequence>
+			<xs:element name="Kontrola" type="KontrolaType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ParametrType">
+		<xs:sequence>
+			<xs:element name="Typ" type="com:TypParametru" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Obor" type="com:OborParametru" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="CiselnikKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DatovyTypKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UkazatelType">
+		<xs:sequence>
+			<xs:group ref="AtributyObjektu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Typ" type="com:TypUkazatele" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZakladniDT" type="com:ZakladniDtUkazatele" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="UkazatelNadrizenyKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="KonkretizaceParametru" type="KonkretizaceParametruType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VazbaNaUcty" type="VazbaNaUctyType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HodnotyParametruDoType">
+		<xs:sequence>
+			<xs:element name="ParametrDo" type="HodnotaParametruDoType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UdajType">
+		<xs:sequence>
+			<xs:element name="SouradniceUdaje" type="SouradniceType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Vykazovany" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dynamicky" type="dt:DT_BOOL" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Povinny" type="dt:DT_BOOL" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="OborHodnot" type="OborHodnotType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Nasobek" type="com:Nasobek" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="UkazatelKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ParametryUdaje" type="HodnotyParametruUdajeType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AtributUdaje" type="AtributUdajeDoType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OmezeniOsoba" type="dt:DT_TEXT4000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="SdileneUdaje" type="SdileneUdajeType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VykazyMvkSeznamType">
+		<xs:sequence>
+			<xs:element name="VykazSkupiny" type="ClenMvkType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OborHodnotType">
+		<xs:sequence>
+			<xs:element name="TypOboruHodnot" type="com:TypOboruHodnot" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="OborHodnotZdroj" type="OborHodnotZdrojType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OborHodnotZdrojType">
+		<xs:choice>
+			<xs:element name="CiselnikKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DomenaCiselniku" type="DomenaCiselnikuType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DatovyTypKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="StrukturaDoType">
+		<xs:sequence>
+			<xs:element name="ElementOsyDo" type="ElementOsyDoType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KonkretizaceElementuOsyType">
+		<xs:sequence>
+			<xs:element name="PrvekKonkretizace" type="PrvekKonkretizaceElementuOsyType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ElementOsyDoType">
+		<xs:sequence>
+			<xs:element name="Osa" type="com:TypOsy" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Kod" type="dt:DT_TEXT6" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Dynamicky" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Soucet" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TypSouctu" type="com:TypSouctu" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Konkretizace" type="KonkretizaceElementuOsyType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Texty" type="TextyElementuOsyType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrvekKonkretizaceElementuOsyType">
+		<xs:sequence>
+			<xs:element name="Poradi" type="dt:DT_INT6" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Soucet" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TypSouctu" type="com:TypSouctu" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Uroven" type="dt:DT_INT1" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Typ" type="com:TypElementuOsy" minOccurs="1" maxOccurs="1"/>
+			<xs:choice minOccurs="1" maxOccurs="1">
+				<xs:element name="UkazatelKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+				<xs:element name="ParametrElementuOsy" type="HodnotaParametruElementuOsyType" minOccurs="1" maxOccurs="1"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TextyElementuOsyType">
+		<xs:sequence>
+			<xs:element name="TextElementuOsy" type="TextElementuOsyType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HodnotaParametruElementuOsyType">
+		<xs:sequence>
+			<xs:element name="ParametrKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Hodnota" type="dt:DT_TEXT4000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Typ" type="com:TypHodnotyVektoru" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dynamicky" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="HodnotaZdroj" type="HodnotaZdrojType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TextElementuOsyType">
+		<xs:sequence>
+			<xs:element name="RastrX" type="dt:DT_INT5" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="RastrY" type="dt:DT_INT5" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Soucet" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Text" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DomenaCiselnikuType">
+		<xs:sequence>
+			<xs:element name="CiselnikKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DomenaCiselnikuKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

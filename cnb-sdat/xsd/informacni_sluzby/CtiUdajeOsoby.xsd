@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:CtiUdajeOsoby:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:CtiUdajeOsoby:v1" xmlns:cuo="urn:cz:cnb:sdat:schemas:CtiUdajeOsoby:v1" xmlns:sys="urn:cz:cnb:sdat:schemas:SystemTypy:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" version="1.0.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" schemaLocation="../common/SpolecneTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="../common/DatoveTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SystemTypy:v1" schemaLocation="../common/SystemTypy.xsd"/>
+	<xs:complexType name="CtiUdajeOsobyResponseType">
+		<xs:sequence>
+			<xs:element name="OdpovedInfo" type="sys:OdpovedInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Odpoved" type="CtiUdajeOsobyOdpovedType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiUdajeOsobyRequestType">
+		<xs:sequence>
+			<xs:element name="ZadostInfo" type="sys:ZadostInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiUdajeOsobyDotaz" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CtiUdajeOsobyRequest" type="cuo:CtiUdajeOsobyRequestType"/>
+	<xs:element name="CtiUdajeOsobyResponse" type="cuo:CtiUdajeOsobyResponseType"/>
+	<xs:complexType name="ZastupovaniType">
+		<xs:sequence>
+			<xs:element name="ZastupovanaOsobaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZastupovanaOsobaNazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostDo" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZastupovaniVykazKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OsobaType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Kategorie" type="com:KategorieOsoby" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostDo" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Vykazujici" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Ico" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Bic" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Lei" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="XbrlId" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Iso20022Id" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Email" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Sektor" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Skupina" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AdresaZeme" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AdresaObec" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AdresaCastObce" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AdresaUlice" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AdresaCisloPopisne" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AdresaCisloOrientacni" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AdresaCoPismeno" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AdresaPsc" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Telefon" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="FinancniRokZacatek" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="FinancniRokKonec" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="TypOsoby" type="com:SeznamKoduType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Certifikat" type="CertifikatType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Zastupovani" type="ZastupovaniType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Pracovnik" type="PracovnikType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PracovnikType">
+		<xs:sequence>
+			<xs:element name="Prijmeni" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Jmeno" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Funkce" type="dt:DT_TEXT100" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostDo" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PracovnikVRoli" type="PracovnikVRoliType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Adresa" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Email" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Telefon" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Fax" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="UzivatelskyUcet" type="UzivatelskyUcetType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Certifikat" type="CertifikatType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UzivatelskaMistaType">
+		<xs:sequence>
+			<xs:element name="UzivatelskaMista" type="OsobaType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiUdajeOsobyDotaz">
+		<xs:sequence>
+			<xs:element name="OsobaKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CertifikatType">
+		<xs:sequence>
+			<xs:element name="Typ" type="com:TypCertifikatu" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Typ certifikátu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Certifikat" type="dt:DT_BLOB" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="CertifikatSn" type="dt:DT_TEXT50" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="CertifikatIdn" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Distinguished name vydavatele certifikátu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CertifikatSdn" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Distinguished name subjektu certifikátu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CertifikatNb" type="dt:DT_TIME" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Počátek platnosti certifikátu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CertifikatNa" type="dt:DT_TIME" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Konec platnosti certifikátu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Aktivni" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Příznak, že certifikát je aktivní</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Zneplatnen" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Příznak, zda je certifikát platný</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Otisk" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Otisk certifikátu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UzivatelskyUcetType">
+		<xs:sequence>
+			<xs:element name="Login" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostDo" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Aktivovany" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Blokovany" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Zamceny_do" type="dt:DT_DATE" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Opravneni" type="OpravneniType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UdajOsobyType">
+		<xs:annotation>
+			<xs:documentation>Budeme poskytovat i dynamické atributy?</xs:documentation>
+		</xs:annotation>
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="PracovnikVRoliType">
+		<xs:sequence>
+			<xs:element name="Role" type="com:RolePracovnika" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostDo" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VykazovaciRamecKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VykazKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OpravneniType">
+		<xs:sequence>
+			<xs:element name="OpravneniKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>V podstatě uživatelské místo, resp. vzor UM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OpravneniNazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostOd" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PlatnostDo" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VykazKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OsobaKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiUdajeOsobyOdpovedType">
+		<xs:sequence>
+			<xs:element name="Osoba" type="OsobaType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

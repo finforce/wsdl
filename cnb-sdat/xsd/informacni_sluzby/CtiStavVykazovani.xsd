@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:CtiStavVykazovani:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:CtiStavVykazovani:v1" xmlns:csv="urn:cz:cnb:sdat:schemas:CtiStavVykazovani:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" xmlns:sys="urn:cz:cnb:sdat:schemas:SystemTypy:v1" xmlns:zpr="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" xmlns:cvp="urn:cz:cnb:sdat:schemas:CtiVykazovaciPovinnost:v1" version="1.0.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:CtiVykazovaciPovinnost:v1" schemaLocation="CtiVykazovaciPovinnost.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" schemaLocation="../common/ZpracovaniTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SystemTypy:v1" schemaLocation="../common/SystemTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" schemaLocation="../common/SpolecneTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="../common/DatoveTypy.xsd"/>
+	<xs:complexType name="CtiStavVykazovaniOdpovedType">
+		<xs:sequence>
+			<xs:element name="StavVykazovani" type="StavVykazovaniType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StavVykazovaniType">
+		<xs:sequence>
+			<xs:element name="StavVykazovaniRamec" type="StavVykazovaniRamecType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiStavVykazovaniDotazType">
+		<xs:sequence>
+			<xs:element name="StavKeDniOd" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StavKeDniDo" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VykazovaciRamecKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VykazKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="OsobaKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RoleOsoby" type="com:RoleOsoby" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DetailniInfo" type="dt:DT_BOOL" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiStavVykazovaniResponseType">
+		<xs:sequence>
+			<xs:element name="OdpovedInfo" type="sys:OdpovedInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiStavVykazovaniDotazType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Odpoved" type="CtiStavVykazovaniOdpovedType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiStavVykazovaniRequestType">
+		<xs:sequence>
+			<xs:element name="ZadostInfo" type="sys:ZadostInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiStavVykazovaniDotazType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CtiStavVykazovaniResponse" type="csv:CtiStavVykazovaniResponseType"/>
+	<xs:element name="CtiStavVykazovaniRequest" type="csv:CtiStavVykazovaniRequestType"/>
+	<xs:complexType name="StavVykazovaniRamecType">
+		<xs:sequence>
+			<xs:element name="VykazovaciRamecKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StavVykazovaniVyskyt" type="StavVykazovaniVyskytType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StavVykazovaniVyskytType">
+		<xs:sequence>
+			<xs:element name="VykazKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VykazujiciOsobaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StavKeDni" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Rozsah" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TerminPredlozeni" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TerminUzavreni" type="dt:DT_TIME" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="StavVyskytu" type="com:StavVyskytuVykazu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="AkceOsoby" type="com:TypAkceOsoby" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="JeUpominany" type="dt:DT_BOOL" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Upominka" type="UpominkaType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VydaniVyskytuStav" type="zpr:VydaniStavType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VyjimkaDO" type="cvp:VyjimkaDOType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VyjimkaJvk" type="cvp:VyjimkaKontrolaType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VyjimkaMvk" type="cvp:VyjimkaMvkType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="PlanSkupinyMvk" type="zpr:PlanSkupinyMvkType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>  
+	</xs:complexType>
+	<xs:complexType name="UpominkaType">
+		<xs:sequence>
+			<xs:element name="Stupen" type="dt:DT_INT1" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Stupeň
+
+#CZ Stupeň
+#EN Level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Poradi" type="dt:DT_INT2" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pořadí
+
+#CZ Pořadí
+#EN Order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Stav" type="com:StavUpominky" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Stav
+
+#CZ Stav
+#EN State</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StavOd" type="dt:DT_TIME" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Stav od
+
+#CZ Stav od
+#EN State from</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Text" type="dt:DT_TEXT4000" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Text
+
+#CZ Text
+#EN Text</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

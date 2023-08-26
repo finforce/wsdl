@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="urn:cz:cnb:sdat:services:CtiSeznamMetodik:v1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ctiSeznamMetodik="urn:cz:cnb:sdat:schemas:CtiSeznamMetodik:v1"
+	xmlns:tns="urn:cz:cnb:sdat:services:CtiSeznamMetodik:v1">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="urn:cz:cnb:sdat:schemas:CtiSeznamMetodik:v1" schemaLocation="../xsd/informacni_sluzby/CtiSeznamMetodik.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ctiSeznamMetodikRequest">
+    <wsdl:part element="ctiSeznamMetodik:CtiSeznamMetodikRequest" name="ctiSeznamMetodikRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ctiSeznamMetodikResponse">
+    <wsdl:part element="ctiSeznamMetodik:CtiSeznamMetodikResponse" name="ctiSeznamMetodikResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CtiSeznamMetodik">
+    <wsdl:operation name="CtiSeznamMetodik">
+      <wsdl:input message="tns:ctiSeznamMetodikRequest" name="ctiSeznamMetodikRequest"/>
+      <wsdl:output message="tns:ctiSeznamMetodikResponse" name="ctiSeznamMetodikResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CtiSeznamMetodikBinding" type="tns:CtiSeznamMetodik">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CtiSeznamMetodik">
+      <soap:operation soapAction="http://sdat.cnb.cz/CtiSeznamMetodik"/>
+      <wsdl:input name="ctiSeznamMetodikRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ctiSeznamMetodikResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CtiSeznamMetodikService">
+    <wsdl:port binding="tns:CtiSeznamMetodikBinding" name="CtiSeznamMetodikPort">
+      <soap:address location="http://localhost/sdat_ws/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

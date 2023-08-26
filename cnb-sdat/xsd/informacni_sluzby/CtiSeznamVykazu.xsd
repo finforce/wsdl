@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:CtiSeznamVykazu:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:CtiSeznamVykazu:v1" xmlns:csv="urn:cz:cnb:sdat:schemas:CtiSeznamVykazu:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" xmlns:obj="urn:cz:cnb:sdat:schemas:ObjektyTypy:v1" xmlns:sys="urn:cz:cnb:sdat:schemas:SystemTypy:v1" version="1.0.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SystemTypy:v1" schemaLocation="../common/SystemTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:ObjektyTypy:v1" schemaLocation="../common/ObjektyTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" schemaLocation="../common/SpolecneTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="../common/DatoveTypy.xsd"/>
+	<xs:complexType name="CtiSeznamVykazuDotazType">
+		<xs:sequence>
+			<xs:element name="PlatnostKDatu" type="dt:DT_DATE" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VykazovaciRamecKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="OsobaKod" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RoleOsoby" type="com:RoleOsoby" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Jazyk" type="com:Jazyk" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiSeznamVykazuOdpovedType">
+		<xs:sequence>
+			<xs:element name="VykazovaciRamec" type="obj:VykazovaciRamecType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CtiSeznamVykazuRequest" type="csv:CtiSeznamVykazuRequestType"/>
+	<xs:complexType name="CtiSeznamVykazuRequestType">
+		<xs:sequence>
+			<xs:element name="ZadostInfo" type="sys:ZadostInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiSeznamVykazuDotazType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CtiSeznamVykazuResponse" type="csv:CtiSeznamVykazuResponseType"/>
+	<xs:complexType name="CtiSeznamVykazuResponseType">
+		<xs:sequence>
+			<xs:element name="OdpovedInfo" type="sys:OdpovedInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiSeznamVykazuDotazType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Odpoved" type="CtiSeznamVykazuOdpovedType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

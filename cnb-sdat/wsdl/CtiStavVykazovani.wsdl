@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="urn:cz:cnb:sdat:schemas:CtiStavVykazovani:v1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ctiStavVykazovani="urn:cz:cnb:sdat:schemas:CtiStavVykazovani:v1"
+	xmlns:tns="urn:cz:cnb:sdat:schemas:CtiStavVykazovani:v1">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="urn:cz:cnb:sdat:schemas:CtiStavVykazovani:v1" schemaLocation="../xsd/informacni_sluzby/CtiStavVykazovani.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ctiStavVykazovaniRequest">
+    <wsdl:part element="ctiStavVykazovani:CtiStavVykazovaniRequest" name="ctiStavVykazovaniRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ctiStavVykazovaniResponse">
+    <wsdl:part element="ctiStavVykazovani:CtiStavVykazovaniResponse" name="ctiStavVykazovaniResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CtiStavVykazovani">
+    <wsdl:operation name="CtiStavVykazovani">
+      <wsdl:input message="tns:ctiStavVykazovaniRequest" name="ctiStavVykazovaniRequest"/>
+      <wsdl:output message="tns:ctiStavVykazovaniResponse" name="ctiStavVykazovaniResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CtiStavVykazovaniBinding" type="tns:CtiStavVykazovani">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CtiStavVykazovani">
+      <soap:operation soapAction="http://sdat.cnb.cz/CtiStavVykazovani"/>
+      <wsdl:input name="ctiStavVykazovaniRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ctiStavVykazovaniResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CtiStavVykazovaniService">
+    <wsdl:port binding="tns:CtiStavVykazovaniBinding" name="CtiStavVykazovaniPort">
+      <soap:address location="http://localhost/sdat_ws/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

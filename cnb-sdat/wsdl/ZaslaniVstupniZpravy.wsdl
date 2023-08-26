@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="urn:cz:cnb:sdat:services:ZaslaniVstupniZpravy:v1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:svc="urn:cz:cnb:sdat:schemas:ZaslaniVstupniZpravy:v1"
+	xmlns:tns="urn:cz:cnb:sdat:services:ZaslaniVstupniZpravy:v1">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="urn:cz:cnb:sdat:schemas:ZaslaniVstupniZpravy:v1" schemaLocation="../xsd/vykazovaci_sluzby/ZaslaniVstupniZpravy.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ZaslaniVstupniZpravyRequest">
+    <wsdl:part element="svc:ZaslaniVstupniZpravyRequest" name="ZaslaniVstupniZpravyRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ZaslaniVstupniZpravyResponse">
+    <wsdl:part element="svc:ZaslaniVstupniZpravyResponse" name="ZaslaniVstupniZpravyResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="ZaslaniVstupniZpravy">
+    <wsdl:operation name="ZaslaniVstupniZpravy">
+      <wsdl:input message="tns:ZaslaniVstupniZpravyRequest" name="ZaslaniVstupniZpravyRequest"/>
+      <wsdl:output message="tns:ZaslaniVstupniZpravyResponse" name="ZaslaniVstupniZpravyResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ZaslaniVstupniZpravyBinding" type="tns:ZaslaniVstupniZpravy">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ZaslaniVstupniZpravy">
+      <soap:operation soapAction="http://sdat.cnb.cz/ZaslaniVstupniZpravy"/>
+      <wsdl:input name="ZaslaniVstupniZpravyRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ZaslaniVstupniZpravyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZaslaniVstupniZpravyService">
+    <wsdl:port binding="tns:ZaslaniVstupniZpravyBinding" name="ZaslaniVstupniZpravyPort">
+      <soap:address location="http://localhost/sdat_ws/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

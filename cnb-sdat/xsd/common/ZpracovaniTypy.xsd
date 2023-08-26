@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" xmlns:zpr="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" xmlns:sp="urn:cz:cnb:sdat:schemas:SpecialniTypy:v1" version="1.1.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpecialniTypy:v1" schemaLocation="SpecialniTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" schemaLocation="SpolecneTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="DatoveTypy.xsd"/>
+	<xs:complexType name="HlavickaPrijatehoVydaniType">
+		<xs:sequence>
+			<xs:element name="VydaniId" type="dt:DT_ID" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VykazKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VykazNazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="OsobaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="OsobaNazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StavKeDni" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="RozsahKod" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="MetodikaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Format" type="com:FormatVstupnichDat2" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="CisloVydani" type="dt:DT_INT14" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TypVydani" type="com:TypVydani" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ReferencniCisloVydani" type="dt:DT_INT14" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DatumPrijetiVydani" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SeznamChybType">
+		<xs:sequence>
+			<xs:element name="Chyba" type="ChybaType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ChybnyZaznam" type="ChybnyZaznamType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChybaType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Zavaznost" type="com:ZavaznostKontroly" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Text" type="dt:DT_TEXT2000" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Lokalizace" type="ChybaLokalizaceType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChybnyZaznamType">
+		<xs:sequence>
+			<xs:element name="DatovaOblast" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kód datové oblasti</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DynPar" type="dt:DT_TEXT2000" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Vektor parametrů a jejich hodnot identifikující záznam</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CisloVydani" type="dt:DT_INT14" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Číslo vydání, ve kterém je chybný záznam</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StavZaznamu" type="com:StavZaznamu" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Stav zpracování záznamu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Chyba" type="ChybaZaznamuType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Chyba k záznamu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChybaZaznamuType">
+		<xs:sequence>
+			<xs:element name="Kod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Zavaznost" type="com:ZavaznostKontroly" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Text" type="dt:DT_TEXT2000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Lokalizace" type="ChybaLokalizaceZaznamuType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>  
+	<xs:complexType name="HlavickaVydaniType">
+		<xs:sequence>
+			<xs:element name="VykazKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="OsobaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StavKeDni" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="RozsahKod" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="MetodikaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Format" type="com:FormatVstupnichDat" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="CisloVydani" type="dt:DT_INT14" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="TypVydani" type="com:TypVydani" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ReferencniCisloVydani" type="dt:DT_INT14" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VydaniStavType">
+		<xs:sequence>
+			<xs:element name="HlavickaPrijatehoVydani" type="HlavickaPrijatehoVydaniType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StavVydani" type="com:StavVydani" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PrijateTransakce" type="dt:DT_BOOL" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="CekajiciTransakce" type="dt:DT_BOOL" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ProtokolZpracovaniVydani" type="ProtokolType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProtokolType">
+		<xs:sequence>
+			<xs:element name="CasVytvoreni" type="dt:DT_TIME" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Časová značka vytvoření protokolu
+
+#CZ Čas vytvoření
+#EN Creation time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Typ" type="com:TypProtokolu" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Typ protokolu (přijetí Vstupní zprávy, zpracování Vydání výskytu výkazu, zpracování MVK).
+
+#CZ Typ
+#EN Type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SubTyp" type="com:SubTypProtokolu" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>SubTyp protokolu (prodrobnější rozlišení typů protokolů z hlediska procesu zpracování a charakteru výstupu).
+
+#CZ SubTyp
+#EN SubType</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SkupinaMvk" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Název protokolu
+
+#CZ Název
+#EN Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Format" type="com:FormatProtokolu" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Formát protokolu (XML SDAT, ISO 20022, XBRL)
+
+#CZ Formát
+#EN Format</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Stav" type="com:StavProtokolu" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Stav
+
+#CZ Stav
+#EN State</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StavOd" type="dt:DT_TIME" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Stav od
+
+#CZ Stav od
+#EN State from</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Obsah" type="sp:VlozenaDataType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Obsah protokolu (XML)
+
+#CZ Obsah
+#EN Content</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProtokolExterni" type="ProtokolExterniType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ProtokolId" type="dt:DT_ID" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identifikátor protokolu
+
+#CZ Identifikátor
+#EN Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>    
+	</xs:complexType>
+	<xs:complexType name="ProtokolExterniType">
+		<xs:sequence>
+			<xs:element name="Soubor" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Format" type="com:FormatProtokolu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="SignaturaProtokolu" type="com:OtiskType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChybaLokalizaceType">
+		<xs:annotation>
+			<xs:documentation>Text obsahující informace, k čemu se chyba vztahuje (např. datová oblast, údaj apod.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Text" type="dt:DT_TEXT2000" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Text</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DatovaOblastKod" type="dt:DT_TEXT100" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kód datové oblasti</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OsaIdZ" type="dt:DT_TEXT6" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identifikátor karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KartaPoradi" type="dt:DT_INT5" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pořadí dynamické karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OsaIdY" type="dt:DT_TEXT6" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identifikátor řádku</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RadekPoradi" type="dt:DT_INT9" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pořadí dynamického řádku</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OsaIdX" type="dt:DT_TEXT6" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identifikátor sloupce</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SloupecPoradi" type="dt:DT_INT9" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Pořadí dynamického sloupce</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Detail" type="ChybaLokalizaceDetailType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Detail k lokalizaci chyby</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChybaLokalizaceDetailType">
+		<xs:annotation>
+			<xs:documentation>Seznam identifikací pro detailní lokalizaci chyby.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Rid" type="dt:DT_TEXT2000" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Identifikační parametr (RID)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DynPar" type="dt:DT_TEXT2000" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Vektor parametrů a jejich hodnot</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence> 
+  </xs:complexType>
+  <xs:complexType name="ChybaLokalizaceZaznamuType">
+		<xs:annotation>
+			<xs:documentation>Seznam identifikací pro detailní lokalizaci chyby.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="DatovaOblastKod" type="dt:DT_TEXT100" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Kód datové oblasti</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Detail" type="ChybaLokalizaceZaznamuDetailType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Detail k lokalizaci chyby</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence> 
+  </xs:complexType>
+  <xs:complexType name="ChybaLokalizaceZaznamuDetailType">
+		<xs:annotation>
+			<xs:documentation>Seznam identifikací pro detailní lokalizaci chyby.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>			
+			<xs:element name="DynPar" type="dt:DT_TEXT2000" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Vektor parametrů a jejich hodnot</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence> 
+  </xs:complexType>
+  <xs:complexType name="PlanSkupinyMvkType">
+    <xs:sequence>
+      <xs:element name="SkupinaMvkKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Stav" type="com:StavPlanuSkupinyMvk" minOccurs="1" maxOccurs="1" />
+      <xs:element name="StavOd" type="dt:DT_TIME" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Vlastnik" type="VyskytVPlanuSkupinyMvkType" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Clen" type="VyskytVPlanuSkupinyMvkType" minOccurs="1" maxOccurs="unbounded" />                                                    
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VyskytVPlanuSkupinyMvkType">
+    <xs:sequence>
+      <xs:element name="VykazKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="VykazujiciOsobaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="StavKeDni" type="dt:DT_DATE" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Rozsah" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="CisloVydani" type="dt:DT_INT14" minOccurs="0" maxOccurs="1"/>                          
+    </xs:sequence>
+  </xs:complexType>
+                 
+</xs:schema>

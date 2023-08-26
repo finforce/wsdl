@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="urn:cz:cnb:sdat:services:CtiZmenyVykazu:v1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ctiZmenyVykazu="urn:cz:cnb:sdat:schemas:CtiZmenyVykazu:v1"
+	xmlns:tns="urn:cz:cnb:sdat:services:CtiZmenyVykazu:v1">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="urn:cz:cnb:sdat:schemas:CtiZmenyVykazu:v1" schemaLocation="../xsd/informacni_sluzby/CtiZmenyVykazu.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ctiZmenyVykazuRequest">
+    <wsdl:part element="ctiZmenyVykazu:CtiZmenyVykazuRequest" name="ctiZmenyVykazuRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ctiZmenyVykazuResponse">
+    <wsdl:part element="ctiZmenyVykazu:CtiZmenyVykazuResponse" name="ctiZmenyVykazuResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CtiZmenyVykazu">
+    <wsdl:operation name="CtiZmenyVykazu">
+      <wsdl:input message="tns:ctiZmenyVykazuRequest" name="ctiZmenyVykazuRequest"/>
+      <wsdl:output message="tns:ctiZmenyVykazuResponse" name="ctiZmenyVykazuResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CtiZmenyVykazuBinding" type="tns:CtiZmenyVykazu">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CtiZmenyVykazu">
+      <soap:operation soapAction="http://sdat.cnb.cz/CtiZmenyVykazu"/>
+      <wsdl:input name="ctiZmenyVykazuRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ctiZmenyVykazuResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CtiZmenyVykazuService">
+    <wsdl:port binding="tns:CtiZmenyVykazuBinding" name="CtiZmenyVykazuPort">
+      <soap:address location="http://localhost/sdat_ws/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:CtiStavZpracovani:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:CtiStavZpracovani:v1" xmlns:csz="urn:cz:cnb:sdat:schemas:CtiStavZpracovani:v1" xmlns:sys="urn:cz:cnb:sdat:schemas:SystemTypy:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" xmlns:zpr="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" version="1.0.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" schemaLocation="../common/ZpracovaniTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" schemaLocation="../common/SpolecneTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="../common/DatoveTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SystemTypy:v1" schemaLocation="../common/SystemTypy.xsd"/>
+	<xs:complexType name="CtiStavZpracovaniResponseType">
+		<xs:sequence>
+			<xs:element name="OdpovedInfo" type="sys:OdpovedInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiStavZpracovaniDotazType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Odpoved" type="CtiStavZpracovaniOdpovedType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiStavZpracovaniRequestType">
+		<xs:sequence>
+			<xs:element name="ZadostInfo" type="sys:ZadostInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Dotaz" type="CtiStavZpracovaniDotazType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CtiStavZpracovaniRequest" type="csz:CtiStavZpracovaniRequestType"/>
+	<xs:element name="CtiStavZpracovaniResponse" type="csz:CtiStavZpracovaniResponseType"/>
+	<xs:complexType name="CtiStavZpracovaniDotazType">
+		<xs:sequence>
+			<xs:element name="VstupniZpravaId" type="dt:DT_ID" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VydaniId" type="dt:DT_ID" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ZahrnoutProtokolVstupniZpravy" type="dt:DT_BOOL" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ZahrnoutProtokolyJvk" type="dt:DT_BOOL" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ZahrnoutProtokolyMvk" type="dt:DT_BOOL" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ProtokolSubTyp" type="com:SubTypProtokolu" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AktualniProtokol" type="dt:DT_BOOL" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CtiStavZpracovaniOdpovedType">
+		<xs:sequence>
+			<xs:element name="StavZpracovani" type="VstupniZpravaStavType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VstupniZpravaStavType">
+		<xs:sequence>
+			<xs:element name="VstupniZpravaId" type="dt:DT_ID" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ReferencniId" type="dt:DT_TEXT30" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZasilajiciOsoba" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DatumVytvoreni" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StavVstupniZpravy" type="com:StavVstupniZpravy" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ProtokolZpracovaniZpravy" type="zpr:ProtokolType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VydaniStav" type="zpr:VydaniStavType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

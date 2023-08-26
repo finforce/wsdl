@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="urn:cz:cnb:sdat:services:CtiTypyOsob:v1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ctiTypyOsob="urn:cz:cnb:sdat:schemas:CtiTypyOsob:v1"
+	xmlns:tns="urn:cz:cnb:sdat:services:CtiTypyOsob:v1">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="urn:cz:cnb:sdat:schemas:CtiTypyOsob:v1" schemaLocation="../xsd/informacni_sluzby/CtiTypyOsob.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ctiTypyOsobRequest">
+    <wsdl:part element="ctiTypyOsob:CtiTypyOsobRequest" name="ctiTypyOsobRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ctiTypyOsobResponse">
+    <wsdl:part element="ctiTypyOsob:CtiTypyOsobResponse" name="ctiTypyOsobResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CtiTypyOsob">
+    <wsdl:operation name="CtiTypyOsob">
+      <wsdl:input message="tns:ctiTypyOsobRequest" name="ctiTypyOsobRequest"/>
+      <wsdl:output message="tns:ctiTypyOsobResponse" name="ctiTypyOsobResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CtiTypyOsobBinding" type="tns:CtiTypyOsob">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CtiTypyOsob">
+      <soap:operation soapAction="http://sdat.cnb.cz/CtiTypyOsob"/>
+      <wsdl:input name="ctiTypyOsobRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ctiTypyOsobResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CtiTypyOsobService">
+    <wsdl:port binding="tns:CtiTypyOsobBinding" name="CtiTypyOsobPort">
+      <soap:address location="http://localhost/sdat_ws/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

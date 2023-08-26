@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	targetNamespace="urn:cz:cnb:sdat:services:CtiVykaz:v1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:ctiVykaz="urn:cz:cnb:sdat:schemas:CtiVykaz:v1"
+	xmlns:tns="urn:cz:cnb:sdat:services:CtiVykaz:v1">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="urn:cz:cnb:sdat:schemas:CtiVykaz:v1" schemaLocation="../xsd/informacni_sluzby/CtiVykaz.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ctiVykazRequest">
+    <wsdl:part element="ctiVykaz:CtiVykazRequest" name="ctiVykazRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ctiVykazResponse">
+    <wsdl:part element="ctiVykaz:CtiVykazResponse" name="ctiVykazResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CtiVykaz">
+    <wsdl:operation name="CtiVykaz">
+      <wsdl:input message="tns:ctiVykazRequest" name="ctiVykazRequest"/>
+      <wsdl:output message="tns:ctiVykazResponse" name="ctiVykazResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CtiVykazBinding" type="tns:CtiVykaz">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CtiVykaz">
+      <soap:operation soapAction="http://sdat.cnb.cz/CtiVykaz"/>
+      <wsdl:input name="ctiVykazRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ctiVykazResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CtiVykazService">
+    <wsdl:port binding="tns:CtiVykazBinding" name="CtiVykazPort">
+      <soap:address location="http://localhost/sdat_ws/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

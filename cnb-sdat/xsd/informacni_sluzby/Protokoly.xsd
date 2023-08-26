@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:Protokoly:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:cz:cnb:sdat:schemas:Protokoly:v1" xmlns:ptk="urn:cz:cnb:sdat:schemas:Protokoly:v1" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:zpr="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" xmlns:com="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" xmlns:dt="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" xmlns:sys="urn:cz:cnb:sdat:schemas:SystemTypy:v1" version="1.1.0">
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SystemTypy:v1" schemaLocation="../common/SystemTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:DatoveTypy:v1" schemaLocation="../common/DatoveTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:SpolecneTypy:v1" schemaLocation="../common/SpolecneTypy.xsd"/>
+	<xs:import namespace="urn:cz:cnb:sdat:schemas:ZpracovaniTypy:v1" schemaLocation="../common/ZpracovaniTypy.xsd"/>
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="../common/xmldsig-core-schema.xsd"/>
+	<xs:complexType name="KrokZpracovaniType">
+		<xs:sequence>
+			<xs:element name="KrokNazev" type="com:KrokZpracovani" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="SouvisejiciVykaz" type="dt:DT_KOD" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VysledekZpracovani" type="com:VysledekProtokolu" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChybyZpracovani" type="zpr:SeznamChybType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VyrazeneVydaniType">
+		<xs:sequence>
+			<xs:element name="HlavickaVydani" type="zpr:HlavickaVydaniType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZjisteneChyby" type="zpr:SeznamChybType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProtokolZpracovaniVstupniZpravyType">
+		<xs:sequence>
+			<xs:element name="Hlavicka" type="HlavickaProtokoluType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VstupniZprava" type="ZpracovanaVstupniZpravaType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VydaniPrijata" type="VydaniPrijataType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VydaniVyrazena" type="VydaniVyrazenaType" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ds:Signature" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HlavickaProtokoluType">
+		<xs:sequence>
+			<xs:element name="CasVytvoreni" type="dt:DT_TIME" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Časová značka vytvoření protokolu
+
+#CZ Čas vytvoření
+#EN Creation time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Typ" type="com:TypProtokolu" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Typ protokolu (přijetí Vstupní zprávy, zpracování Vydání výskytu výkazu, zpracování MVK).
+
+#CZ Typ
+#EN Type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SubTyp" type="com:SubTypProtokolu" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>SubTyp protokolu (prodrobnější rozlišení typů protokolů z hlediska procesu zpracování a charakteru výstupu).
+
+#CZ SubTyp
+#EN SubType</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SkupinaMvk" type="dt:DT_KOD" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Nazev" type="dt:DT_TEXT1000" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Název protokolu
+
+#CZ Název
+#EN Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VerzeProtokolu" type="sys:VerzeType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VydaniPrijataType">
+		<xs:sequence>
+			<xs:element name="PrijateVydani" type="zpr:HlavickaPrijatehoVydaniType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VydaniVyrazenaType">
+		<xs:sequence>
+			<xs:element name="VyrazeneVydani" type="VyrazeneVydaniType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ProtokolZpracovaniVstupniZpravy" type="ptk:ProtokolZpracovaniVstupniZpravyType"/>
+	<xs:complexType name="ZpracovanaVstupniZpravaType">
+		<xs:sequence>
+			<xs:element name="VstupniZpravaId" type="dt:DT_ID" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ReferencniId" type="dt:DT_TEXT30" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZasilajiciOsobaKod" type="dt:DT_KOD" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZasilajiciOsobaNazev" type="dt:DT_TEXT1000" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DatumVytvoreni" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DatumPrijeti" type="dt:DT_TIME" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="StavVstupniZpravy" type="com:StavVstupniZpravy" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="PocetVydaniCelkem" type="dt:DT_INT5" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZjisteneChyby" type="zpr:SeznamChybType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProtokolZpracovaniVydaniType">
+		<xs:sequence>
+			<xs:element name="Hlavicka" type="HlavickaProtokoluType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="VydaniPrehled" type="zpr:HlavickaPrijatehoVydaniType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ZpracovaniVydani" type="ZpracovaniVydaniType" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="ds:Signature" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ProtokolZpracovaniVydani" type="ptk:ProtokolZpracovaniVydaniType"/>
+	<xs:complexType name="ZpracovaniVydaniType">
+		<xs:sequence>
+			<xs:element name="PredchoziVydani" type="PredchoziVydaniType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SouhrnZpracovani" type="SouhrnZpracovaniType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VysledekZpracovani" type="com:VysledekProtokolu" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="KrokZpracovani" type="KrokZpracovaniType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SouhrnZpracovaniType">
+		<xs:sequence>
+			<xs:element name="PolozkaSouhrnuZpracovani" type="PolozkaSouhrnuZpracovaniType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PredchoziVydaniType">
+		<xs:sequence>
+			<xs:element name="VydaniId" type="dt:DT_ID" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="SouhrnZpracovani" type="SouhrnZpracovaniType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ChybyZpracovani" type="zpr:SeznamChybType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PolozkaSouhrnuZpracovaniType">
+		<xs:sequence>
+			<xs:element name="Popis" type="dt:DT_TEXT100" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>možná spíše definovat enumeraci</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Hodnota" type="dt:DT_TEXT100" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

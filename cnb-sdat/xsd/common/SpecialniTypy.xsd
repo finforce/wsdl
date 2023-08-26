@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:cz:cnb:sdat:schemas:SpecialniTypy:v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sp="urn:cz:cnb:sdat:schemas:SpecialniTypy:v1" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" version="1.0.0">
+	<xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="xmlmime.xsd"/>
+	<xs:complexType name="VlozenaDataType">
+		<xs:sequence>
+			<xs:element name="Data" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
+		
